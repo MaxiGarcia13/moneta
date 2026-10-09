@@ -1,0 +1,17 @@
+{
+  "name": "moneta",
+  "version": "1.0.0",
+  "description": "A simple and intuitive app to track expenses, manage budgets, and take control of your personal finances.",
+  "keywords": [],
+  "author": "Maximiliano Garcia Mortigliengo",
+  "license": "ISC",
+  "devEngines": {
+    "packageManager": {
+      "name": "pnpm",
+      "version": "12.10.1",
+      "onFail": "download"
+    }
+  },
+  "packageManager": "pnpm@12.10.1",
+  "type": "module"
+}
