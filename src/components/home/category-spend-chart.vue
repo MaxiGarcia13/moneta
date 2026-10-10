@@ -32,6 +32,9 @@ const options = computed<ApexOptions>(() =>
           size: '62%',
           labels: {
             show: true,
+            value: {
+              formatter: (value) => formatAmount(Number(value)),
+            },
             total: {
               show: true,
               label: 'Spent',

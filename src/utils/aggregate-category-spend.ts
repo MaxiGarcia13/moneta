@@ -35,6 +35,6 @@ export function aggregateCategorySpend(
 
   return {
     labels: sorted.map(([label]) => label),
-    values: sorted.map(([, value]) => value),
+    values: sorted.map(([, value]) => Math.round(value * 100) / 100),
   };
 }
