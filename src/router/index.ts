@@ -10,7 +10,6 @@ const router = createRouter({
   routes: [loginRoute, homeRoute, listRoute, formRoute],
 });
 
-
 registerAuthGuard(router);
 
 export default router;
