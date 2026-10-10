@@ -4,11 +4,13 @@ import type {
   TransactionCategory,
   TransactionType,
 } from '@/domain/transactions';
+import { useQueryClient } from '@tanstack/vue-query';
 import { reactive, ref } from 'vue';
 import Button from '@/components/ui/button.vue';
 import Input from '@/components/ui/input.vue';
 import Select from '@/components/ui/select.vue';
 import Textarea from '@/components/ui/textarea.vue';
+import { TRANSACTIONS_QUERY_KEY } from '@/composables/use-transactions-query';
 import {
   TRANSACTION_CATEGORIES,
   TRANSACTION_TYPES,
@@ -17,6 +19,8 @@ import { createTransaction } from '@/services/transactions';
 import { dateTimeLocalToIso } from '@/utils/date-time-local-to-iso';
 import { formatEnumLabel } from '@/utils/format-enum-label';
 import { toDateTimeLocalValue } from '@/utils/to-date-time-local-value';
+
+const queryClient = useQueryClient();
 
 const emit = defineEmits<{
   success: [];
@@ -82,6 +86,7 @@ async function onSubmit() {
 
   try {
     await createTransaction(toCreateInput());
+    await queryClient.invalidateQueries({ queryKey: [TRANSACTIONS_QUERY_KEY] });
     emit('success');
   } catch (error) {
     submitError.value
