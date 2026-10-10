@@ -68,7 +68,8 @@ export interface Database {
         | 'shopping'
         | 'education'
         | 'subscriptions'
-        | 'health_fitness';
+        | 'health_fitness'
+        | 'car';
       type: 'income' | 'expense';
     };
     CompositeTypes: {
@@ -208,6 +209,7 @@ export const Constants = {
         'education',
         'subscriptions',
         'health_fitness',
+        'car',
       ],
       type: ['income', 'expense'],
     },
