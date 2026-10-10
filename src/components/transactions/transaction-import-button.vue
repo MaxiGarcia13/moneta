@@ -20,7 +20,7 @@ function openImportDialog() {
     @click="openImportDialog"
   >
     <UploadIcon class="size-4" />
-    Import
+    <span class="hidden md:block">Import</span>
   </Button>
 
   <TransactionImportDialog ref="importDialog" />

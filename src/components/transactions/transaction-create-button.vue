@@ -20,7 +20,7 @@ function openFormDialog() {
     @click="openFormDialog"
   >
     <PlusIcon class="size-4" />
-    New
+    <span class="hidden md:block">New</span>
   </Button>
 
   <TransactionFormDialog ref="formDialog" />
