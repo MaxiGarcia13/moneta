@@ -26,31 +26,34 @@ const errorMessage = computed(() => {
 </script>
 
 <template>
-  <TransactionTableSkeleton v-if="isPending" />
+  <div class="flex min-h-0 flex-1 flex-col gap-4">
+    <TransactionTableSkeleton v-if="isPending" />
 
-  <p
-    v-else-if="errorMessage"
-    class="text-sm text-danger"
-    role="alert"
-  >
-    {{ errorMessage }}
-  </p>
-
-  <template v-else>
     <p
-      v-if="transactions.length === 0"
-      class="text-sm text-muted"
+      v-else-if="errorMessage"
+      class="text-sm text-danger"
+      role="alert"
     >
-      No transactions found
+      {{ errorMessage }}
     </p>
 
     <template v-else>
-      <TransactionTable :transactions="transactions" />
-      <TransactionPagination
-        v-model:offset="offset"
-        :limit="transactionsStore.limit"
-        :total="total"
-      />
+      <p
+        v-if="transactions.length === 0"
+        class="text-sm text-muted"
+      >
+        No transactions found
+      </p>
+
+      <template v-else>
+        <TransactionTable :transactions="transactions" />
+        <TransactionPagination
+          v-model:offset="offset"
+          class="shrink-0"
+          :limit="transactionsStore.limit"
+          :total="total"
+        />
+      </template>
     </template>
-  </template>
+  </div>
 </template>

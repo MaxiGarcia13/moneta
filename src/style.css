@@ -29,12 +29,15 @@
     @apply min-h-screen font-sans;
   }
 
+  #app {
+    @apply flex min-h-screen flex-col;
+  }
+
   main {
     max-width: 900px;
     width: 100%;
     margin: 0 auto;
-    height: 100%;
-    @apply px-6 py-2;
+    @apply flex min-h-0 flex-1 flex-col px-6 py-2;
   }
 
   h1,

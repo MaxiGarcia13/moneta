@@ -9,8 +9,8 @@ import TransactionList from '@/components/transactions/transaction-list.vue';
   <AppHeader />
 
   <main class="py-8">
-    <div class="flex flex-col gap-6 animate-[fade-up_0.5s_ease-out]">
-      <div class="flex flex-wrap items-end justify-between gap-4">
+    <div class="flex min-h-0 flex-1 flex-col gap-6 animate-[fade-up_0.5s_ease-out]">
+      <div class="flex shrink-0 flex-wrap items-end justify-between gap-4">
         <TransactionFilters />
         <TransactionCreateButton />
       </div>

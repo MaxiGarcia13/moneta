@@ -10,9 +10,9 @@ defineProps<{
 </script>
 
 <template>
-  <div class="overflow-x-auto rounded-xl border border-border">
+  <div class="min-h-0 flex-1 overflow-auto rounded-xl border border-border">
     <table class="w-full min-w-150 border-collapse text-left text-sm">
-      <thead class="bg-surface-raised text-muted">
+      <thead class="sticky top-0 bg-surface-raised text-muted">
         <tr>
           <th class="px-4 py-3 font-medium">
             Date

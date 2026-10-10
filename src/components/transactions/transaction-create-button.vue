@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { useTemplateRef } from 'vue';
+import PlusIcon from '@/components/icons/plus.vue';
 import TransactionFormDialog from '@/components/transactions/transaction-form-dialog.vue';
 import Button from '@/components/ui/button.vue';
 
@@ -18,6 +19,7 @@ function openFormDialog() {
     class="h-11.5"
     @click="openFormDialog"
   >
+    <PlusIcon class="size-4" />
     New
   </Button>
 
