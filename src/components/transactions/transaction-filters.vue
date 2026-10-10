@@ -5,17 +5,10 @@ import {
   TRANSACTION_CATEGORIES,
   TRANSACTION_TYPES,
 } from '@/domain/transactions';
+import { useTransactionsStore } from '@/stores/transactions';
 import { formatEnumLabel } from '@/utils/format-enum-label';
 
-export interface TransactionFiltersModel {
-  title: string;
-  category: string;
-  type: string;
-  issuedFrom: string;
-  issuedTo: string;
-}
-
-const filters = defineModel<TransactionFiltersModel>({ required: true });
+const transactionsStore = useTransactionsStore();
 
 const typeOptions = TRANSACTION_TYPES.map((type) => ({
   value: type,
@@ -32,7 +25,7 @@ const categoryOptions = TRANSACTION_CATEGORIES.map((category) => ({
   <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
     <Input
       id="filter-title"
-      v-model="filters.title"
+      v-model="transactionsStore.draftFilters.title"
       label="Title"
       type="search"
       autocomplete="off"
@@ -40,7 +33,7 @@ const categoryOptions = TRANSACTION_CATEGORIES.map((category) => ({
 
     <Select
       id="filter-type"
-      v-model="filters.type"
+      v-model="transactionsStore.draftFilters.type"
       label="Type"
       :options="typeOptions"
       empty-label="All"
@@ -48,7 +41,7 @@ const categoryOptions = TRANSACTION_CATEGORIES.map((category) => ({
 
     <Select
       id="filter-category"
-      v-model="filters.category"
+      v-model="transactionsStore.draftFilters.category"
       label="Category"
       :options="categoryOptions"
       empty-label="All"
@@ -56,14 +49,14 @@ const categoryOptions = TRANSACTION_CATEGORIES.map((category) => ({
 
     <Input
       id="filter-issued-from"
-      v-model="filters.issuedFrom"
+      v-model="transactionsStore.draftFilters.issuedFrom"
       label="From"
       type="date"
     />
 
     <Input
       id="filter-issued-to"
-      v-model="filters.issuedTo"
+      v-model="transactionsStore.draftFilters.issuedTo"
       label="To"
       type="date"
     />

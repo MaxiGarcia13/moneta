@@ -11,6 +11,14 @@ export type CreateTransactionInput = Pick<
   'title' | 'amount' | 'type' | 'category' | 'description' | 'issued_at'
 >;
 
+export interface TransactionFilters {
+  title: string;
+  category: string;
+  type: string;
+  issuedFrom: string;
+  issuedTo: string;
+}
+
 export interface ListTransactionsParams {
   limit: number;
   offset: number;
