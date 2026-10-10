@@ -9,12 +9,14 @@ import Button from '@/components/ui/button.vue';
 import Input from '@/components/ui/input.vue';
 import Select from '@/components/ui/select.vue';
 import Textarea from '@/components/ui/textarea.vue';
-import { formatEnumLabel } from '@/domain/format-enum-label';
 import {
   TRANSACTION_CATEGORIES,
   TRANSACTION_TYPES,
 } from '@/domain/transactions';
 import { createTransaction } from '@/services/transactions';
+import { dateTimeLocalToIso } from '@/utils/date-time-local-to-iso';
+import { formatEnumLabel } from '@/utils/format-enum-label';
+import { toDateTimeLocalValue } from '@/utils/to-date-time-local-value';
 
 const emit = defineEmits<{
   success: [];
@@ -29,26 +31,6 @@ const categoryOptions = TRANSACTION_CATEGORIES.map((category) => ({
   value: category,
   label: formatEnumLabel(category),
 }));
-
-function toDateTimeLocalValue(date = new Date()) {
-  const pad = (value: number) => String(value).padStart(2, '0');
-
-  return [
-    date.getFullYear(),
-    '-',
-    pad(date.getMonth() + 1),
-    '-',
-    pad(date.getDate()),
-    'T',
-    pad(date.getHours()),
-    ':',
-    pad(date.getMinutes()),
-  ].join('');
-}
-
-function dateTimeLocalToIso(value: string) {
-  return new Date(value).toISOString();
-}
 
 const form = reactive({
   title: '',
