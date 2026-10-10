@@ -70,8 +70,8 @@ export interface Database {
         | 'subscriptions'
         | 'health_fitness'
         | 'car'
-        | 'investment';
-      type: 'income' | 'expense';
+        | 'work';
+      type: 'income' | 'expense' | 'investment';
     };
     CompositeTypes: {
       [_ in never]: never
@@ -211,9 +211,9 @@ export const Constants = {
         'subscriptions',
         'health_fitness',
         'car',
-        'investment',
+        'work',
       ],
-      type: ['income', 'expense'],
+      type: ['income', 'expense', 'investment'],
     },
   },
 } as const;
