@@ -42,10 +42,12 @@ export function aggregateMonthlyCashflow(
       continue;
     }
 
-    expenseByMonth.set(
-      monthKey,
-      (expenseByMonth.get(monthKey) ?? 0) + transaction.amount,
-    );
+    if (transaction.type === 'expense') {
+      expenseByMonth.set(
+        monthKey,
+        (expenseByMonth.get(monthKey) ?? 0) + transaction.amount,
+      );
+    }
   }
 
   const income = monthKeys.map((key) => incomeByMonth.get(key) ?? 0);

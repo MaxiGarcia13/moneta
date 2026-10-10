@@ -6,6 +6,7 @@ import type {
 import { formatAmount } from '@/utils/format-amount';
 import { formatDate } from '@/utils/format-date';
 import { formatEnumLabel } from '@/utils/format-enum-label';
+import { transactionTypeAmountClass } from '@/utils/transaction-type-amount-class';
 
 withDefaults(
   defineProps<{
@@ -51,7 +52,7 @@ withDefaults(
     </td>
     <td
       class="px-4 py-3 text-right font-medium tabular-nums"
-      :class="type === 'income' ? 'text-accent' : 'text-danger'"
+      :class="transactionTypeAmountClass(type)"
     >
       {{ formatAmount(amount) }}
     </td>

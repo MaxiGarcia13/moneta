@@ -73,7 +73,7 @@ export function useHomeChartsQuery(
     for (const transaction of filteredTransactions.value) {
       if (transaction.type === 'income') {
         income += transaction.amount;
-      } else {
+      } else if (transaction.type === 'expense') {
         expense += transaction.amount;
       }
     }

@@ -1,5 +1,6 @@
 import type { CreateTransactionInput } from '@/domain/transactions';
 import { inferTransactionCategory } from '@/utils/infer-transaction-category';
+import { inferTransactionType } from '@/utils/infer-transaction-type';
 import { normalizeWhitespace } from '@/utils/normalize-whitespace';
 import { parseSpanishAmount } from '@/utils/parse-spanish-amount';
 import { parseSpanishDateToIso } from '@/utils/parse-spanish-date';
@@ -52,7 +53,7 @@ function parseMovementRow(
     title: concept,
     description: concept,
     amount: Math.abs(signedAmount),
-    type: signedAmount < 0 ? 'expense' : 'income',
+    type: inferTransactionType(concept, signedAmount),
     category: inferTransactionCategory(concept),
     issued_at: parseSpanishDateToIso(operationDate),
   };
