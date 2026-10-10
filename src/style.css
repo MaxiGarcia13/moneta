@@ -31,7 +31,10 @@
 
   main {
     max-width: 900px;
+    width: 100%;
     margin: 0 auto;
+    height: 100%;
+    @apply px-6 py-2;
   }
 
   h1,
