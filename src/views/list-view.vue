@@ -9,10 +9,6 @@ import TransactionList from '@/components/transactions/transaction-list.vue';
 
   <main class="py-8">
     <div class="flex flex-col gap-6 animate-[fade-up_0.5s_ease-out]">
-      <h1 class="text-2xl font-medium tracking-tight">
-        Transactions
-      </h1>
-
       <TransactionFilters />
       <TransactionList />
     </div>

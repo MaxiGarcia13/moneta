@@ -13,6 +13,7 @@ withDefaults(
     step?: string | number;
     inputmode?: 'none' | 'text' | 'decimal' | 'numeric' | 'tel' | 'search' | 'email' | 'url';
     disabled?: boolean;
+    inputClass?: string;
   }>(),
   {
     type: 'text',
@@ -42,7 +43,7 @@ function onInput(event: Event) {
       :step="step"
       :inputmode="inputmode"
       :disabled="disabled"
-      :class="CONTROL_CLASS"
+      :class="[CONTROL_CLASS, inputClass]"
       @input="onInput"
     >
   </Field>
