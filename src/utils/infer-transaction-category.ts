@@ -34,6 +34,7 @@ const CATEGORY_RULES: Array<{
     patterns: [
       /balenoil/i,
       /feu\s*vert/i,
+      /parkia/i,
     ],
   },
   {
@@ -45,6 +46,9 @@ const CATEGORY_RULES: Array<{
       /\bregma\b/i,
       /camping/i,
       /gallofa/i,
+      /vueling/i,
+      /iberia/i,
+      /\balsa\b/i,
     ],
   },
   {
