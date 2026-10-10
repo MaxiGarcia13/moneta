@@ -2,6 +2,7 @@
 import { storeToRefs } from 'pinia';
 import { computed } from 'vue';
 import TransactionPagination from '@/components/transactions/transaction-pagination.vue';
+import TransactionTableSkeleton from '@/components/transactions/transaction-table-skeleton.vue';
 import TransactionTable from '@/components/transactions/transaction-table.vue';
 import { useTransactionsQuery } from '@/composables/use-transactions-query';
 import { useTransactionsStore } from '@/stores/transactions';
@@ -25,12 +26,7 @@ const errorMessage = computed(() => {
 </script>
 
 <template>
-  <p
-    v-if="isPending"
-    class="text-sm text-muted"
-  >
-    Loading transactions…
-  </p>
+  <TransactionTableSkeleton v-if="isPending" />
 
   <p
     v-else-if="errorMessage"
