@@ -7,6 +7,10 @@ import type {
 import { debounce } from '@maxigarcia/js-utils';
 import { defineStore } from 'pinia';
 import { computed, reactive, ref, watch } from 'vue';
+import {
+  endOfLocalDayIso,
+  startOfLocalDayIso,
+} from '@/utils/local-day-bounds';
 
 export const TRANSACTION_PAGE_SIZE = 20;
 const FILTERS_DEBOUNCE_MS = 500;
@@ -77,10 +81,10 @@ export const useTransactionsStore = defineStore('transactions', () => {
       ? (filters.type as TransactionType)
       : null,
     issuedFrom: filters.issuedFrom
-      ? new Date(`${filters.issuedFrom}T00:00:00`).toISOString()
+      ? startOfLocalDayIso(filters.issuedFrom)
       : null,
     issuedTo: filters.issuedTo
-      ? new Date(`${filters.issuedTo}T23:59:59.999`).toISOString()
+      ? endOfLocalDayIso(filters.issuedTo)
       : null,
   }));
 
