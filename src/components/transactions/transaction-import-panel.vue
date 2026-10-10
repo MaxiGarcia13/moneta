@@ -106,15 +106,6 @@ async function onFileSelect(file: File) {
   }
 }
 
-function clearFile() {
-  movements.value = [];
-  selected.value = [];
-  duplicates.value = [];
-  parseError.value = null;
-  submitError.value = null;
-  fileName.value = null;
-}
-
 async function save() {
   submitError.value = null;
 
@@ -164,7 +155,7 @@ defineExpose({
         :file-name="fileName ?? ''"
         :new-count="newCount"
         :duplicate-count="duplicateCount"
-        @clear="clearFile"
+        @clear="reset"
       />
 
       <TransactionImportPreview
