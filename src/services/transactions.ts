@@ -20,14 +20,24 @@ function requireUserId() {
 export async function createTransaction(
   input: CreateTransactionInput,
 ) {
+  await createTransactions([input]);
+}
+
+export async function createTransactions(
+  inputs: CreateTransactionInput[],
+) {
+  if (inputs.length === 0) {
+    return;
+  }
+
   const userId = requireUserId();
 
   const { error } = await supabase
     .from('transactions')
-    .insert({
+    .insert(inputs.map((input) => ({
       ...input,
       user_id: userId,
-    });
+    })));
 
   if (error) {
     throw error;
