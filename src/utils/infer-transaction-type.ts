@@ -2,6 +2,7 @@ import type { TransactionType } from '@/domain/transactions';
 
 const INVESTMENT_PATTERNS = [
   /invertimos\s*por\s*ti/i,
+  /garcia\s+mortigliengo\s+maximiliano\s+daniel/i,
 ];
 
 export function inferTransactionType(
