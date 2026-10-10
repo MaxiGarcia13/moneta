@@ -89,9 +89,13 @@ function goNext() {
         </span>
         <Button
           v-else
-          variant="ghost"
+          :variant="item === currentPage ? 'raised' : 'ghost'"
           size="sm"
-          :class="item === currentPage ? 'border-accent-border bg-accent-soft' : undefined"
+          :class="
+            item === currentPage
+              ? 'border-accent-border! bg-accent-soft! font-medium'
+              : undefined
+          "
           :aria-current="item === currentPage ? 'page' : undefined"
           @click="goToPage(item)"
         >

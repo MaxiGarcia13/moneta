@@ -1,25 +1,36 @@
 export type PaginationPageItem = number | 'ellipsis';
 
-const DEFAULT_WINDOW_SIZE = 5;
+const DEFAULT_LEFT_COUNT = 2;
+const DEFAULT_RIGHT_COUNT = 3;
 
 export function getPaginationPages(
   currentPage: number,
   totalPages: number,
-  windowSize = DEFAULT_WINDOW_SIZE,
+  leftCount = DEFAULT_LEFT_COUNT,
+  rightCount = DEFAULT_RIGHT_COUNT,
 ): PaginationPageItem[] {
   if (totalPages <= 0) {
     return [];
   }
 
+  const windowSize = leftCount + 1 + rightCount;
+
   if (totalPages <= windowSize) {
     return Array.from({ length: totalPages }, (_, index) => index + 1);
   }
 
-  let start = Math.max(1, currentPage);
-  const end = Math.min(totalPages, start + windowSize - 1);
+  let start = Math.max(1, currentPage - leftCount);
+  let end = Math.min(totalPages, currentPage + rightCount);
 
-  if (end - start + 1 < windowSize) {
-    start = Math.max(1, end - windowSize + 1);
+  const missingLeft = leftCount - (currentPage - start);
+  const missingRight = rightCount - (end - currentPage);
+
+  if (missingLeft > 0) {
+    end = Math.min(totalPages, end + missingLeft);
+  }
+
+  if (missingRight > 0) {
+    start = Math.max(1, start - missingRight);
   }
 
   const pages: PaginationPageItem[] = [];
