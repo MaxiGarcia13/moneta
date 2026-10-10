@@ -1,48 +1,9 @@
 import type {
-  CreateTransactionInput,
   ListTransactionsParams,
   ListTransactionsResult,
 } from '@/domain/transactions';
-import { useAuthStore } from '@/stores/auth';
+import { requireUserId } from '@/services/transactions/require-user-id';
 import { supabase } from '@/supabase/client';
-
-function requireUserId() {
-  const authStore = useAuthStore();
-  const userId = authStore.user?.id;
-
-  if (!userId) {
-    throw new Error('You must be signed in to manage transactions');
-  }
-
-  return userId;
-}
-
-export async function createTransaction(
-  input: CreateTransactionInput,
-) {
-  await createTransactions([input]);
-}
-
-export async function createTransactions(
-  inputs: CreateTransactionInput[],
-) {
-  if (inputs.length === 0) {
-    return;
-  }
-
-  const userId = requireUserId();
-
-  const { error } = await supabase
-    .from('transactions')
-    .insert(inputs.map((input) => ({
-      ...input,
-      user_id: userId,
-    })));
-
-  if (error) {
-    throw error;
-  }
-}
 
 export async function listTransactions(
   params: ListTransactionsParams,
