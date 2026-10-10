@@ -4,5 +4,6 @@ export default eslintConfig(
   {
     typescript: true,
     vue: true,
+    tailwind: true,
   },
 );
