@@ -166,6 +166,9 @@ importers:
 
   .:
     dependencies:
+      '@maxigarcia/js-utils':
+        specifier: ^1.22.1
+        version: 1.22.1
       '@supabase/supabase-js':
         specifier: ^2.117.3
         version: 2.117.3
@@ -475,6 +478,9 @@ packages:
 
   '@maxigarcia/eslint-config@1.14.1':
     resolution: {integrity: sha512-P1w/J50KuK0KXLrLEQ457aYtaJXYQPpsdA/C6tbYMe4+Ti4DA5eyDMOtr5Sq/cFfHiqg01Zgfyg3ugPsD4tGNg==}
+
+  '@maxigarcia/js-utils@1.22.1':
+    resolution: {integrity: sha512-EqCL0qLAEuhj7FVtwYOB//X1NFiBi3N0cBDtPbkpWkyUPjeh/hOAk92iOE2VDxGtW1mDM6C2Orqevmp7Pk1y8Q==}
 
   '@nodelib/fs.scandir@2.1.5':
     resolution: {integrity: sha512-vq24Bq3ym5HEQm2NKCr3yXDwjc7vTsEThRDnkp2DK9p1uqLR+DHurm/NOTo0KG7HYHU7eppKZj3MyqYuMBf62g==}
@@ -2863,6 +2869,8 @@ snapshots:
       - ts-declaration-location
       - typescript
       - vitest
+
+  '@maxigarcia/js-utils@1.22.1': {}
 
   '@nodelib/fs.scandir@2.1.5':
     dependencies:

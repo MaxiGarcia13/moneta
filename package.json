@@ -26,6 +26,7 @@
     "phoenix": "pnpm clean && pnpm install && pnpm run build"
   },
   "dependencies": {
+    "@maxigarcia/js-utils": "^1.22.1",
     "@supabase/supabase-js": "^2.117.3",
     "@tailwindcss/vite": "^4.3.3",
     "@tanstack/vue-query": "^5.104.1",
