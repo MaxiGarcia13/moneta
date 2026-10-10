@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import TransactionTableHeader from '@/components/transactions/transaction-table-header.vue';
 import Skeleton from '@/components/ui/skeleton.vue';
 
 const SKELETON_ROW_COUNT = 8;
@@ -12,25 +13,7 @@ const skeletonRows = Array.from({ length: SKELETON_ROW_COUNT }, (_, index) => in
     aria-label="Loading transactions"
   >
     <table class="w-full min-w-150 border-collapse text-left text-sm">
-      <thead class="sticky top-0 bg-surface-raised text-muted">
-        <tr>
-          <th class="px-4 py-3 font-medium">
-            Date
-          </th>
-          <th class="px-4 py-3 font-medium">
-            Title
-          </th>
-          <th class="px-4 py-3 font-medium">
-            Type
-          </th>
-          <th class="px-4 py-3 font-medium">
-            Category
-          </th>
-          <th class="px-4 py-3 text-right font-medium">
-            Amount
-          </th>
-        </tr>
-      </thead>
+      <TransactionTableHeader />
       <tbody>
         <tr
           v-for="row in skeletonRows"

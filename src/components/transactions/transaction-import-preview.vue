@@ -1,9 +1,8 @@
 <script setup lang="ts">
 import type { CreateTransactionInput } from '@/domain/transactions';
 import { computed } from 'vue';
-import { formatAmount } from '@/utils/format-amount';
-import { formatDate } from '@/utils/format-date';
-import { formatEnumLabel } from '@/utils/format-enum-label';
+import TransactionTableHeader from '@/components/transactions/transaction-table-header.vue';
+import TransactionTableRow from '@/components/transactions/transaction-table-row.vue';
 
 const props = defineProps<{
   movements: CreateTransactionInput[];
@@ -49,8 +48,8 @@ function toggleRow(index: number, event: Event) {
 <template>
   <div class="max-h-96 min-h-0 overflow-auto rounded-xl border border-border">
     <table class="w-full min-w-150 border-collapse text-left text-sm">
-      <thead class="sticky top-0 bg-surface-raised text-muted">
-        <tr>
+      <TransactionTableHeader>
+        <template #leading>
           <th class="w-10 px-3 py-3">
             <input
               type="checkbox"
@@ -61,65 +60,38 @@ function toggleRow(index: number, event: Event) {
               @change="toggleAll"
             >
           </th>
-          <th class="px-4 py-3 font-medium">
-            Date
-          </th>
-          <th class="px-4 py-3 font-medium">
-            Title
-          </th>
-          <th class="px-4 py-3 font-medium">
-            Type
-          </th>
-          <th class="px-4 py-3 font-medium">
-            Category
-          </th>
-          <th class="px-4 py-3 text-right font-medium">
-            Amount
-          </th>
-        </tr>
-      </thead>
+        </template>
+      </TransactionTableHeader>
       <tbody>
-        <tr
+        <TransactionTableRow
           v-for="(movement, index) in movements"
           :key="`${movement.issued_at}-${movement.title}-${index}`"
-          class="border-t border-border"
-          :class="duplicates[index] ? 'opacity-50' : ''"
+          :class="duplicates[index] ? 'opacity-50' : undefined"
+          :issued-at="movement.issued_at"
+          :title="movement.title"
+          :type="movement.type"
+          :category="movement.category"
+          :amount="movement.amount"
+          truncate-title
         >
-          <td class="px-3 py-3">
-            <input
-              type="checkbox"
-              class="size-4 cursor-pointer accent-accent disabled:cursor-not-allowed"
-              :checked="selected[index]"
-              :disabled="duplicates[index]"
-              @change="toggleRow(index, $event)"
-            >
-          </td>
-          <td class="whitespace-nowrap px-4 py-3 text-muted">
-            {{ formatDate(movement.issued_at) }}
-          </td>
-          <td class="max-w-64 px-4 py-3 font-medium">
-            <span
-              class="block truncate"
-              :title="movement.title"
-            >{{ movement.title }}</span>
-            <span
-              v-if="duplicates[index]"
-              class="text-xs font-normal text-muted"
-            >Already imported</span>
-          </td>
-          <td class="px-4 py-3 text-muted">
-            {{ formatEnumLabel(movement.type) }}
-          </td>
-          <td class="px-4 py-3 text-muted">
-            {{ movement.category ? formatEnumLabel(movement.category) : '—' }}
-          </td>
-          <td
-            class="px-4 py-3 text-right font-medium tabular-nums"
-            :class="movement.type === 'income' ? 'text-accent' : 'text-danger'"
+          <template #leading>
+            <td class="px-3 py-3">
+              <input
+                type="checkbox"
+                class="size-4 cursor-pointer accent-accent disabled:cursor-not-allowed"
+                :checked="selected[index]"
+                :disabled="duplicates[index]"
+                @change="toggleRow(index, $event)"
+              >
+            </td>
+          </template>
+          <template
+            v-if="duplicates[index]"
+            #title-extra
           >
-            {{ formatAmount(movement.amount) }}
-          </td>
-        </tr>
+            <span class="text-xs font-normal text-muted">Already imported</span>
+          </template>
+        </TransactionTableRow>
       </tbody>
     </table>
   </div>
