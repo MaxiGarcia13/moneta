@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useRouter } from 'vue-router';
-import AppButton from '@/components/ui/app-button.vue';
+import Button from '@/components/ui/button.vue';
 import { useAuthStore } from '@/stores/auth';
 
 const authStore = useAuthStore();
@@ -32,12 +32,12 @@ async function onSignOut() {
         </span>
       </p>
 
-      <AppButton
+      <Button
         variant="ghost"
         @click="onSignOut"
       >
         Sign out
-      </AppButton>
+      </Button>
     </div>
   </main>
 </template>

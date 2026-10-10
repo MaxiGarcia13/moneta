@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import GithubIcon from '@/components/icons/github-icon.vue';
-import AppButton from '@/components/ui/app-button.vue';
+import Button from '@/components/ui/button.vue';
 
 defineProps<{
   loading?: boolean;
@@ -12,7 +12,7 @@ defineEmits<{
 </script>
 
 <template>
-  <AppButton
+  <Button
     :disabled="loading"
     @click="$emit('click', $event)"
   >
@@ -20,5 +20,5 @@ defineEmits<{
     <span class="font-medium">
       {{ loading ? 'Redirecting…' : 'Continue with GitHub' }}
     </span>
-  </AppButton>
+  </Button>
 </template>
