@@ -41,6 +41,7 @@ const CATEGORY_RULES: Array<{
     patterns: [
       /\bbar\b/i,
       /glovo/i,
+      /\bg6\b/i,
       /\bregma\b/i,
       /camping/i,
       /gallofa/i,
