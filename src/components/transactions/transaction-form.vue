@@ -20,11 +20,11 @@ import { dateTimeLocalToIso } from '@/utils/date-time-local-to-iso';
 import { formatEnumLabel } from '@/utils/format-enum-label';
 import { toDateTimeLocalValue } from '@/utils/to-date-time-local-value';
 
-const queryClient = useQueryClient();
-
 const emit = defineEmits<{
   success: [];
 }>();
+
+const queryClient = useQueryClient();
 
 const typeOptions = TRANSACTION_TYPES.map((type) => ({
   value: type,
