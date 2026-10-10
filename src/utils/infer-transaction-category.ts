@@ -22,6 +22,24 @@ const CATEGORY_RULES: Array<{
       /coviran/i,
     ],
   },
+  {
+    category: 'car',
+    patterns: [
+      /balenoil/i,
+    ],
+  },
+  {
+    category: 'leisure',
+    patterns: [
+      /\bbar\b/i,
+    ],
+  },
+  {
+    category: 'health_fitness',
+    patterns: [
+      /saravia\s*bartomioli/i,
+    ],
+  },
 ];
 
 export function inferTransactionCategory(
