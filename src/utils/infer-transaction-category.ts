@@ -9,6 +9,7 @@ const CATEGORY_RULES: Array<{
     patterns: [
       /amazon\s*prime/i,
       /disney/i,
+      /apple\.com\/bill/i,
     ],
   },
   {

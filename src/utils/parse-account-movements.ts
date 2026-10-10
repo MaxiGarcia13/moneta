@@ -3,7 +3,7 @@ import { inferTransactionCategory } from '@/utils/infer-transaction-category';
 import { parseSpanishAmount } from '@/utils/parse-spanish-amount';
 import { parseSpanishDateToIso } from '@/utils/parse-spanish-date';
 
-const HEADER_FECHA_OPERACION = 'fecha operación';
+const HEADER_FECHA_OPERACION = 'fecha operacion';
 const HEADER_CONCEPTO = 'concepto';
 const HEADER_IMPORTE = 'importe';
 
@@ -11,12 +11,19 @@ function normalizeText(value: string) {
   return value.replace(/\s+/g, ' ').trim();
 }
 
+function foldText(value: string) {
+  return normalizeText(value)
+    .normalize('NFD')
+    .replace(/\p{M}/gu, '')
+    .toLowerCase();
+}
+
 function cellText(cell: Element | undefined) {
   return normalizeText(cell?.textContent ?? '');
 }
 
 function findHeaderIndexes(headerCells: Element[]) {
-  const labels = headerCells.map((cell) => cellText(cell).toLowerCase());
+  const labels = headerCells.map((cell) => foldText(cellText(cell)));
 
   return {
     operationDate: labels.findIndex((label) => label === HEADER_FECHA_OPERACION),

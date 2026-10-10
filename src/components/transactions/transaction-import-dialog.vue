@@ -9,6 +9,7 @@ import Dialog from '@/components/ui/dialog.vue';
 import { TRANSACTIONS_QUERY_KEY } from '@/composables/use-transactions-query';
 import { createTransactions } from '@/services/transactions';
 import { parseAccountMovements } from '@/utils/parse-account-movements';
+import { readFileAsLatin1 } from '@/utils/read-file-as-latin1';
 
 const dialogRef = useTemplateRef<{
   showModal: () => void;
@@ -55,7 +56,7 @@ async function onFileSelect(file: File) {
   fileName.value = file.name;
 
   try {
-    const html = await file.text();
+    const html = await readFileAsLatin1(file);
     const parsed = parseAccountMovements(html);
     movements.value = parsed;
     selected.value = parsed.map(() => true);
