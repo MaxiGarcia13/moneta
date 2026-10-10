@@ -1,27 +1,16 @@
 <script setup lang="ts">
-import { useTemplateRef } from 'vue';
 import PlusIcon from '@/components/icons/plus.vue';
 import TransactionFormDialog from '@/components/transactions/transaction-form-dialog.vue';
-import Button from '@/components/ui/button.vue';
-
-const formDialogRef = useTemplateRef<{
-  showModal: () => void;
-}>('formDialog');
-
-function openFormDialog() {
-  formDialogRef.value?.showModal();
-}
+import TransactionToolbarDialogButton from '@/components/transactions/transaction-toolbar-dialog-button.vue';
 </script>
 
 <template>
-  <Button
-    size="sm"
-    class="h-11.5"
-    @click="openFormDialog"
+  <TransactionToolbarDialogButton
+    label="New"
+    :dialog="TransactionFormDialog"
   >
-    <PlusIcon class="size-4" />
-    <span class="hidden md:block">New</span>
-  </Button>
-
-  <TransactionFormDialog ref="formDialog" />
+    <template #icon>
+      <PlusIcon class="size-4" />
+    </template>
+  </TransactionToolbarDialogButton>
 </template>
