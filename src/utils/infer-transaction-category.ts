@@ -13,6 +13,12 @@ const CATEGORY_RULES: Array<{
     ],
   },
   {
+    category: 'housing',
+    patterns: [
+      /jazztel/i,
+    ],
+  },
+  {
     category: 'groceries',
     patterns: [
       /\blupa\b/i,
@@ -20,12 +26,14 @@ const CATEGORY_RULES: Array<{
       /\blidl\b/i,
       /\bbm\b/i,
       /coviran/i,
+      /carrefour/i,
     ],
   },
   {
     category: 'car',
     patterns: [
       /balenoil/i,
+      /feu\s*vert/i,
     ],
   },
   {
@@ -34,12 +42,20 @@ const CATEGORY_RULES: Array<{
       /\bbar\b/i,
       /glovo/i,
       /\bregma\b/i,
+      /camping/i,
+      /gallofa/i,
     ],
   },
   {
     category: 'health_fitness',
     patterns: [
       /saravia\s*bartomioli/i,
+    ],
+  },
+  {
+    category: 'shopping',
+    patterns: [
+      /decathlon/i,
     ],
   },
 ];
