@@ -11,5 +11,20 @@ export type CreateTransactionInput = Pick<
   'title' | 'amount' | 'type' | 'category' | 'description' | 'issued_at'
 >;
 
+export interface ListTransactionsParams {
+  limit: number;
+  offset: number;
+  title?: string;
+  category?: TransactionCategory | null;
+  type?: TransactionType | null;
+  issuedFrom?: string | null;
+  issuedTo?: string | null;
+}
+
+export interface ListTransactionsResult {
+  items: Transaction[];
+  total: number;
+}
+
 export const TRANSACTION_TYPES = Constants.public.Enums.type;
 export const TRANSACTION_CATEGORIES = Constants.public.Enums.category;
