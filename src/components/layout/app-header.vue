@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import SignOutButton from '@/components/auth/sign-out-button.vue';
-import UserAvatar from '@/components/auth/user-avatar.vue';
+import UserMenu from '@/components/auth/user-menu.vue';
 import AppBrand from '@/components/layout/app-brand.vue';
 import AppNav from '@/components/layout/app-nav.vue';
 import { useAuthStore } from '@/stores/auth';
@@ -23,13 +22,7 @@ const authStore = useAuthStore();
         <AppNav />
       </div>
 
-      <div
-        v-if="authStore.user"
-        class="flex items-center gap-3"
-      >
-        <UserAvatar />
-        <SignOutButton />
-      </div>
+      <UserMenu v-if="authStore.user" />
     </div>
   </header>
 </template>
