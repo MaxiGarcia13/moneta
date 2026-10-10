@@ -1,5 +1,6 @@
 import type { CreateTransactionInput } from '@/domain/transactions';
 import { inferTransactionCategory } from '@/utils/infer-transaction-category';
+import { normalizeWhitespace } from '@/utils/normalize-whitespace';
 import { parseSpanishAmount } from '@/utils/parse-spanish-amount';
 import { parseSpanishDateToIso } from '@/utils/parse-spanish-date';
 
@@ -7,19 +8,15 @@ const HEADER_FECHA_OPERACION = 'fecha operacion';
 const HEADER_CONCEPTO = 'concepto';
 const HEADER_IMPORTE = 'importe';
 
-function normalizeText(value: string) {
-  return value.replace(/\s+/g, ' ').trim();
-}
-
 function foldText(value: string) {
-  return normalizeText(value)
+  return normalizeWhitespace(value)
     .normalize('NFD')
     .replace(/\p{M}/gu, '')
     .toLowerCase();
 }
 
 function cellText(cell: Element | undefined) {
-  return normalizeText(cell?.textContent ?? '');
+  return normalizeWhitespace(cell?.textContent ?? '');
 }
 
 function findHeaderIndexes(headerCells: Element[]) {

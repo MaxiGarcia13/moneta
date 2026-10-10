@@ -1,3 +1,5 @@
+import { normalizeWhitespace } from '@/utils/normalize-whitespace';
+
 export interface TransactionFingerprintInput {
   issued_at: string;
   title: string;
@@ -19,10 +21,6 @@ function issuedDateKey(issuedAt: string) {
   return `${year}-${month}-${day}`;
 }
 
-function normalizeTitle(title: string) {
-  return title.replace(/\s+/g, ' ').trim();
-}
-
 function normalizeAmount(amount: number) {
   return Number(amount).toFixed(2);
 }
@@ -30,7 +28,7 @@ function normalizeAmount(amount: number) {
 export function transactionFingerprint(input: TransactionFingerprintInput) {
   return [
     issuedDateKey(input.issued_at),
-    normalizeTitle(input.title),
+    normalizeWhitespace(input.title),
     normalizeAmount(input.amount),
     input.type,
   ].join('|');
