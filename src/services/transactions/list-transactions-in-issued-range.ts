@@ -4,19 +4,24 @@ import { supabase } from '@/supabase/client';
 
 const PAGE_SIZE = 1000;
 
+type TransactionInIssuedRange = Pick<
+  Transaction,
+  'issued_at' | 'title' | 'amount' | 'type' | 'category'
+>;
+
 export async function listTransactionsInIssuedRange(
   issuedFrom: string,
   issuedTo: string,
-): Promise<Pick<Transaction, 'issued_at' | 'title' | 'amount' | 'type'>[]> {
+): Promise<TransactionInIssuedRange[]> {
   requireUserId();
 
-  const items: Pick<Transaction, 'issued_at' | 'title' | 'amount' | 'type'>[] = [];
+  const items: TransactionInIssuedRange[] = [];
   let offset = 0;
 
   while (true) {
     const { data, error } = await supabase
       .from('transactions')
-      .select('issued_at, title, amount, type')
+      .select('issued_at, title, amount, type, category')
       .gte('issued_at', issuedFrom)
       .lte('issued_at', issuedTo)
       .order('issued_at', { ascending: true })
