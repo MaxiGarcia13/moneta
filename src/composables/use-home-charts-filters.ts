@@ -1,4 +1,4 @@
-import { reactive } from 'vue';
+import { ref } from 'vue';
 import { getDefaultHomeDateRange } from '@/utils/month-bounds';
 
 export interface HomeChartsFilters {
@@ -18,7 +18,7 @@ function createDefaultFilters(): HomeChartsFilters {
 }
 
 export function useHomeChartsFilters() {
-  const filters = reactive<HomeChartsFilters>(createDefaultFilters());
+  const filters = ref<HomeChartsFilters>(createDefaultFilters());
 
   return { filters };
 }
