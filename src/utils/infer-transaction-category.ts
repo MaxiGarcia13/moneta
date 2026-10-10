@@ -32,6 +32,8 @@ const CATEGORY_RULES: Array<{
     category: 'leisure',
     patterns: [
       /\bbar\b/i,
+      /glovo/i,
+      /\bregma\b/i,
     ],
   },
   {
