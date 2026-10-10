@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue';
-import GithubIcon from '@/components/icons/github-icon.vue';
+import GithubSignInButton from '@/components/auth/github-sign-in-button.vue';
 import { useAuthStore } from '@/stores/auth';
 
 const authStore = useAuthStore();
@@ -21,25 +21,30 @@ async function onGithubClick() {
 </script>
 
 <template>
-  <main class="flex min-h-screen flex-col items-center justify-center gap-4 p-6 text-center">
-    <h1>Moneta</h1>
-    <p>Sign in to track expenses and budgets.</p>
+  <main
+    class="relative flex min-h-screen flex-col items-center justify-center overflow-hidden px-6 py-12 text-center"
+  >
+    <div
+      aria-hidden="true"
+      class="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_50%_0%,rgba(61,214,198,0.14),transparent_55%),radial-gradient(ellipse_at_80%_100%,rgba(61,214,198,0.06),transparent_45%)]"
+    />
 
-    <button
-      type="button"
-      class="mt-2 inline-flex cursor-pointer items-center gap-2.5 rounded-lg border border-border bg-surface px-5 py-3 text-foreground disabled:cursor-not-allowed disabled:opacity-60 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
-      :disabled="isLoading"
-      @click="onGithubClick"
-    >
-      <GithubIcon />
-      <span>{{ isLoading ? 'Redirecting…' : 'Continue with GitHub' }}</span>
-    </button>
+    <div class="relative flex max-w-sm flex-col items-center gap-5 animate-[fade-up_0.5s_ease-out]">
+      <h1 class="text-5xl font-semibold tracking-tight text-foreground sm:text-6xl">
+        Moneta
+      </h1>
+      <GithubSignInButton
+        :loading="isLoading"
+        @click="onGithubClick"
+      />
 
-    <p
-      v-if="errorMessage"
-      class="text-red-700"
-    >
-      {{ errorMessage }}
-    </p>
+      <p
+        v-if="errorMessage"
+        class="text-sm text-danger"
+        role="alert"
+      >
+        {{ errorMessage }}
+      </p>
+    </div>
   </main>
 </template>

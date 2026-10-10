@@ -1,18 +1,49 @@
 @import 'tailwindcss';
 
 @theme {
-  --color-muted: #6b6375;
-  --color-foreground: #08060d;
-  --color-background: #fff;
-  --color-border: #e5e4e7;
-  --color-code: #f4f3ec;
-  --color-accent: #aa3bff;
-  --color-accent-soft: rgba(170, 59, 255, 0.1);
-  --color-accent-border: rgba(170, 59, 255, 0.5);
-  --color-surface: rgba(244, 243, 236, 0.5);
-  --shadow-md: rgba(0, 0, 0, 0.1) 0 10px 15px -3px, rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
+  --color-background: #0c0e12;
+  --color-foreground: #e8eaef;
+  --color-muted: #8b919c;
+  --color-border: #1e232b;
+  --color-surface: #141820;
+  --color-surface-raised: #1a1f28;
+  --color-accent: #3dd6c6;
+  --color-accent-soft: rgba(61, 214, 198, 0.12);
+  --color-accent-border: rgba(61, 214, 198, 0.4);
+  --color-danger: #f07178;
+  --color-code: #1a1f28;
 
-  --font-sans: system-ui, 'Segoe UI', Roboto, sans-serif;
-  --font-heading: system-ui, 'Segoe UI', Roboto, sans-serif;
+  --font-sans: 'DM Sans', ui-sans-serif, system-ui, sans-serif;
+  --font-heading: 'Fraunces', ui-serif, Georgia, serif;
   --font-mono: ui-monospace, Consolas, monospace;
+
+  --shadow-md: rgba(0, 0, 0, 0.4) 0 10px 15px -3px, rgba(0, 0, 0, 0.25) 0 4px 6px -2px;
+}
+
+@layer base {
+  html {
+    @apply bg-background text-foreground antialiased;
+  }
+
+  body {
+    @apply min-h-screen font-sans;
+  }
+
+  h1,
+  h2,
+  h3 {
+    @apply font-heading;
+  }
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(0.75rem);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }

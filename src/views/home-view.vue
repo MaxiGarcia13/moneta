@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { useRouter } from 'vue-router';
+import AppButton from '@/components/ui/app-button.vue';
 import { useAuthStore } from '@/stores/auth';
 
 const authStore = useAuthStore();
@@ -12,18 +13,31 @@ async function onSignOut() {
 </script>
 
 <template>
-  <main class="flex min-h-screen flex-col items-center justify-center gap-4 p-6 text-center">
-    <h1>Moneta</h1>
-    <p v-if="authStore.user">
-      Signed in as {{ authStore.user.email ?? authStore.user.user_metadata?.user_name }}
-    </p>
+  <main
+    class="relative flex min-h-screen flex-col items-center justify-center overflow-hidden px-6 py-12 text-center"
+  >
+    <div
+      aria-hidden="true"
+      class="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_50%_0%,rgba(61,214,198,0.14),transparent_55%),radial-gradient(ellipse_at_20%_100%,rgba(61,214,198,0.06),transparent_45%)]"
+    />
 
-    <button
-      type="button"
-      class="mt-2 cursor-pointer rounded-lg border border-border bg-transparent px-4 py-2.5 text-foreground focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
-      @click="onSignOut"
-    >
-      Sign out
-    </button>
+    <div class="relative flex max-w-sm flex-col items-center gap-5 animate-[fade-up_0.5s_ease-out]">
+      <p
+        v-if="authStore.user"
+        class="text-base leading-relaxed text-muted"
+      >
+        Signed in as
+        <span class="text-foreground">
+          {{ authStore.user.email ?? authStore.user.user_metadata?.user_name }}
+        </span>
+      </p>
+
+      <AppButton
+        variant="ghost"
+        @click="onSignOut"
+      >
+        Sign out
+      </AppButton>
+    </div>
   </main>
 </template>
