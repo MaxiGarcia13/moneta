@@ -1,24 +1,13 @@
 <script setup lang="ts">
 import Input from '@/components/ui/input.vue';
 import Select from '@/components/ui/select.vue';
-import {
-  TRANSACTION_CATEGORIES,
-  TRANSACTION_TYPES,
-} from '@/domain/transactions';
 import { useTransactionsStore } from '@/stores/transactions';
-import { formatEnumLabel } from '@/utils/format-enum-label';
+import {
+  TRANSACTION_CATEGORY_OPTIONS,
+  TRANSACTION_TYPE_OPTIONS,
+} from '@/utils/transaction-select-options';
 
 const transactionsStore = useTransactionsStore();
-
-const typeOptions = TRANSACTION_TYPES.map((type) => ({
-  value: type,
-  label: formatEnumLabel(type),
-}));
-
-const categoryOptions = TRANSACTION_CATEGORIES.map((category) => ({
-  value: category,
-  label: formatEnumLabel(category),
-}));
 </script>
 
 <template>
@@ -27,7 +16,7 @@ const categoryOptions = TRANSACTION_CATEGORIES.map((category) => ({
       id="filter-type"
       v-model="transactionsStore.draftFilters.type"
       label="Type"
-      :options="typeOptions"
+      :options="TRANSACTION_TYPE_OPTIONS"
       empty-label="All"
     />
 
@@ -35,7 +24,7 @@ const categoryOptions = TRANSACTION_CATEGORIES.map((category) => ({
       id="filter-category"
       v-model="transactionsStore.draftFilters.category"
       label="Category"
-      :options="categoryOptions"
+      :options="TRANSACTION_CATEGORY_OPTIONS"
       empty-label="All"
     />
 

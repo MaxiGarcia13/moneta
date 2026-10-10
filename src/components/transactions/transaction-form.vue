@@ -11,14 +11,13 @@ import Input from '@/components/ui/input.vue';
 import Select from '@/components/ui/select.vue';
 import Textarea from '@/components/ui/textarea.vue';
 import { TRANSACTIONS_QUERY_KEY } from '@/composables/use-transactions-query';
-import {
-  TRANSACTION_CATEGORIES,
-  TRANSACTION_TYPES,
-} from '@/domain/transactions';
 import { createTransaction } from '@/services/transactions';
 import { dateTimeLocalToIso } from '@/utils/date-time-local-to-iso';
-import { formatEnumLabel } from '@/utils/format-enum-label';
 import { toDateTimeLocalValue } from '@/utils/to-date-time-local-value';
+import {
+  TRANSACTION_CATEGORY_OPTIONS,
+  TRANSACTION_TYPE_OPTIONS,
+} from '@/utils/transaction-select-options';
 
 withDefaults(
   defineProps<{
@@ -36,16 +35,6 @@ const emit = defineEmits<{
 }>();
 
 const queryClient = useQueryClient();
-
-const typeOptions = TRANSACTION_TYPES.map((type) => ({
-  value: type,
-  label: formatEnumLabel(type),
-}));
-
-const categoryOptions = TRANSACTION_CATEGORIES.map((category) => ({
-  value: category,
-  label: formatEnumLabel(category),
-}));
 
 const form = reactive({
   title: '',
@@ -118,7 +107,6 @@ defineExpose({
     class="flex flex-col gap-5"
     @submit.prevent="onSubmit"
   >
-
     <Input
       id="transaction-title"
       v-model="form.title"
@@ -142,7 +130,7 @@ defineExpose({
       id="transaction-type"
       v-model="form.type"
       label="Type"
-      :options="typeOptions"
+      :options="TRANSACTION_TYPE_OPTIONS"
       :error="fieldErrors.type"
     />
 
@@ -150,7 +138,7 @@ defineExpose({
       id="transaction-category"
       v-model="form.category"
       label="Category"
-      :options="categoryOptions"
+      :options="TRANSACTION_CATEGORY_OPTIONS"
       empty-label="None"
     />
 
