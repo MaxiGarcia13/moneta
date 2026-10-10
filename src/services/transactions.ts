@@ -1,4 +1,4 @@
-import type { CreateTransactionInput, Transaction } from '@/domain/transactions';
+import type { CreateTransactionInput } from '@/domain/transactions';
 import { useAuthStore } from '@/stores/auth';
 import { supabase } from '@/supabase/client';
 

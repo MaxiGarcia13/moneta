@@ -2,10 +2,10 @@
 import { CONTROL_CLASS } from '@/components/ui/control-class';
 import Field from '@/components/ui/field.vue';
 
-export type SelectOption = {
+export interface SelectOption {
   value: string;
   label: string;
-};
+}
 
 withDefaults(
   defineProps<{
