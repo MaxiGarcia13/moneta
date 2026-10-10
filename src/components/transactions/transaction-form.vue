@@ -20,6 +20,17 @@ import { dateTimeLocalToIso } from '@/utils/date-time-local-to-iso';
 import { formatEnumLabel } from '@/utils/format-enum-label';
 import { toDateTimeLocalValue } from '@/utils/to-date-time-local-value';
 
+withDefaults(
+  defineProps<{
+    hideSubmit?: boolean;
+    formId?: string;
+  }>(),
+  {
+    hideSubmit: false,
+    formId: undefined,
+  },
+);
+
 const emit = defineEmits<{
   success: [];
 }>();
@@ -95,13 +106,19 @@ async function onSubmit() {
     isSubmitting.value = false;
   }
 }
+
+defineExpose({
+  isSubmitting,
+});
 </script>
 
 <template>
   <form
+    :id="formId"
     class="flex flex-col gap-5"
     @submit.prevent="onSubmit"
   >
+
     <Input
       id="transaction-title"
       v-model="form.title"
@@ -160,6 +177,7 @@ async function onSubmit() {
     </p>
 
     <Button
+      v-if="!hideSubmit"
       type="submit"
       :disabled="isSubmitting"
     >
