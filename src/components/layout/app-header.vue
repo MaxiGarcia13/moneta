@@ -17,8 +17,8 @@ const authStore = useAuthStore();
     class="border-b border-border bg-background"
     :class="[props.class]"
   >
-    <div class="mx-auto flex h-14 items-center justify-between gap-4 px-6 max-w-225">
-      <div class="flex items-center gap-6">
+    <div class="mx-auto flex h-24 md:h-14 items-center justify-between gap-4 px-6 max-w-225">
+      <div class="flex items-center gap-2 md:gap-6 flex-wrap">
         <AppBrand />
         <AppNav />
       </div>
