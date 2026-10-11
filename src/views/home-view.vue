@@ -8,41 +8,24 @@ import IncomeSpendChart from '@/components/home/income-spend-chart.vue';
 import AppHeader from '@/components/layout/app-header.vue';
 import { useHomeChartsFilters } from '@/composables/use-home-charts-filters';
 import { useHomeChartsQuery } from '@/composables/use-home-charts-query';
-import { useHomeYearCashflowQuery } from '@/composables/use-home-year-cashflow-query';
 
 const { filters } = useHomeChartsFilters();
 const {
-  isPending: isChartsPending,
-  isError: isChartsError,
-  error: chartsError,
+  isPending,
+  isError,
+  error,
   kpis,
   categorySpend,
 } = useHomeChartsQuery(filters);
-const {
-  isPending: isYearCashflowPending,
-  isError: isYearCashflowError,
-  error: yearCashflowError,
-  monthlyCashflow,
-} = useHomeYearCashflowQuery();
-
-const isPending = computed(
-  () => isChartsPending.value || isYearCashflowPending.value,
-);
 
 const errorMessage = computed(() => {
-  if (isChartsError.value) {
-    return chartsError.value instanceof Error
-      ? chartsError.value.message
-      : 'Failed to load charts';
+  if (!isError.value) {
+    return null;
   }
 
-  if (isYearCashflowError.value) {
-    return yearCashflowError.value instanceof Error
-      ? yearCashflowError.value.message
-      : 'Failed to load charts';
-  }
-
-  return null;
+  return error.value instanceof Error
+    ? error.value.message
+    : 'Failed to load charts';
 });
 </script>
 
@@ -70,7 +53,7 @@ const errorMessage = computed(() => {
           :net="kpis.net"
         />
         <CategorySpendChart :spend="categorySpend" />
-        <IncomeSpendChart :cashflow="monthlyCashflow" />
+        <IncomeSpendChart />
       </template>
     </div>
   </main>

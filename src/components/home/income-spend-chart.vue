@@ -1,22 +1,36 @@
 <script setup lang="ts">
 import type { ApexOptions } from 'apexcharts';
-import type { MonthlyCashflow } from '@/utils/aggregate-monthly-cashflow';
-import { computed } from 'vue';
+import { computed, useTemplateRef } from 'vue';
 import VueApexCharts from 'vue3-apexcharts';
+import IncomeSpendFiltersDialog from '@/components/home/income-spend-filters-dialog.vue';
+import FilterIcon from '@/components/icons/filter.vue';
+import Button from '@/components/ui/button.vue';
+import Skeleton from '@/components/ui/skeleton.vue';
+import { useIncomeSpendCashflowQuery } from '@/composables/use-income-spend-cashflow-query';
+import { useIncomeSpendFilters } from '@/composables/use-income-spend-filters';
 import {
   CHART_COLOR_REMAINING,
   CHART_COLOR_SPENT,
   createBaseChartOptions,
 } from '@/utils/apex-chart-theme';
 import { formatAmount } from '@/utils/format-amount';
+import { formatDateOnly } from '@/utils/format-date-only';
 
-const props = defineProps<{
-  cashflow: MonthlyCashflow;
-}>();
+const { filters, isDefaultRange } = useIncomeSpendFilters();
+const {
+  isPending,
+  isError,
+  error,
+  monthlyCashflow,
+} = useIncomeSpendCashflowQuery(filters);
+
+const filtersDialogRef = useTemplateRef<{
+  showModal: () => void;
+}>('filtersDialog');
 
 const series = computed(() => [
-  { name: 'Spent', data: props.cashflow.expense },
-  { name: 'Remaining', data: props.cashflow.remaining },
+  { name: 'Spent', data: monthlyCashflow.value.expense },
+  { name: 'Remaining', data: monthlyCashflow.value.remaining },
 ]);
 
 const options = computed<ApexOptions>(() =>
@@ -35,7 +49,7 @@ const options = computed<ApexOptions>(() =>
     colors: [CHART_COLOR_SPENT, CHART_COLOR_REMAINING],
     dataLabels: { enabled: false },
     xaxis: {
-      categories: props.cashflow.months,
+      categories: monthlyCashflow.value.months,
       axisBorder: { color: '#1e232b' },
       axisTicks: { color: '#1e232b' },
     },
@@ -53,22 +67,82 @@ const options = computed<ApexOptions>(() =>
 );
 
 const hasData = computed(() =>
-  props.cashflow.income.some((value) => value > 0)
-  || props.cashflow.expense.some((value) => value > 0),
+  monthlyCashflow.value.income.some((value) => value > 0)
+  || monthlyCashflow.value.expense.some((value) => value > 0),
 );
+
+const rangeLabel = computed(() => {
+  if (isDefaultRange.value) {
+    return 'Last 12 months, spent against income';
+  }
+
+  return `${formatDateOnly(filters.value.issuedFrom)} – ${formatDateOnly(filters.value.issuedTo)}`;
+});
+
+const errorMessage = computed(() => {
+  if (!isError.value) {
+    return null;
+  }
+
+  return error.value instanceof Error
+    ? error.value.message
+    : 'Failed to load chart';
+});
+
+function openFiltersDialog() {
+  filtersDialogRef.value?.showModal();
+}
 </script>
 
 <template>
   <section class="rounded-xl bg-surface p-4">
-    <h2 class="text-lg font-heading">
-      Income vs spend
-    </h2>
-    <p class="mt-1 text-sm text-muted">
-      Last 12 months, spent against income
+    <div class="flex items-start justify-between gap-3">
+      <div class="min-w-0">
+        <h2 class="text-lg font-heading">
+          Income vs spend
+        </h2>
+        <p class="mt-1 text-sm text-muted">
+          {{ rangeLabel }}
+        </p>
+      </div>
+
+      <Button
+        variant="ghost"
+        size="sm"
+        class="relative shrink-0"
+        aria-label="Filter date range"
+        @click="openFiltersDialog"
+      >
+        <FilterIcon class="size-5" />
+        <span
+          v-if="!isDefaultRange"
+          class="absolute -top-1.5 -right-1.5 size-2 rounded-full bg-accent ring-2 ring-surface"
+        />
+      </Button>
+    </div>
+
+    <IncomeSpendFiltersDialog
+      ref="filtersDialog"
+      v-model="filters"
+    />
+
+    <Skeleton
+      v-if="isPending"
+      class="mt-4 h-80"
+      aria-busy="true"
+      aria-label="Loading income vs spend"
+    />
+
+    <p
+      v-else-if="errorMessage"
+      class="mt-8 text-center text-sm text-danger"
+      role="alert"
+    >
+      {{ errorMessage }}
     </p>
 
     <p
-      v-if="!hasData"
+      v-else-if="!hasData"
       class="mt-8 text-center text-sm text-muted"
     >
       No transactions in this range
