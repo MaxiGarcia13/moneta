@@ -38,7 +38,7 @@ export function getDefaultHomeDateRange(now = new Date()) {
 }
 
 export function getDefaultIncomeSpendDateRange(now = new Date()) {
-  return getDateRangeFromMonthsAgo(11, now);
+  return getDateRangeFromMonthsAgo(5, now);
 }
 
 export function listMonthKeysInRange(issuedFrom: string, issuedTo: string) {

@@ -84,7 +84,7 @@ const chartWidth = computed(() => {
 
 const rangeLabel = computed(() => {
   if (isDefaultRange.value) {
-    return 'Last 12 months, spent and invested against income';
+    return 'Last 6 months, spent and invested against income';
   }
 
   return `${formatDateOnly(filters.value.issuedFrom)} – ${formatDateOnly(filters.value.issuedTo)}`;
