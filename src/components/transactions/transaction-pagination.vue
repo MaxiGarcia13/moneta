@@ -1,6 +1,9 @@
 <script setup lang="ts">
 import { computed } from 'vue';
+import ChevronLeftIcon from '@/components/icons/chevron-left.vue';
+import ChevronRightIcon from '@/components/icons/chevron-right.vue';
 import Button from '@/components/ui/button.vue';
+import { useMediaQuery } from '@/composables/use-media-query';
 import { getPaginationPages } from '@/utils/get-pagination-pages';
 
 const props = defineProps<{
@@ -8,7 +11,12 @@ const props = defineProps<{
   total: number;
 }>();
 
+const MOBILE_LEFT_COUNT = 1;
+const MOBILE_RIGHT_COUNT = 2;
+
 const offset = defineModel<number>('offset', { required: true });
+
+const isDesktop = useMediaQuery('(min-width: 640px)');
 
 const totalPages = computed(() => {
   if (props.total === 0 || props.limit <= 0) {
@@ -26,9 +34,18 @@ const currentPage = computed(() => {
   return Math.floor(offset.value / props.limit) + 1;
 });
 
-const pageItems = computed(() =>
-  getPaginationPages(currentPage.value, totalPages.value),
-);
+const pageItems = computed(() => {
+  if (isDesktop.value) {
+    return getPaginationPages(currentPage.value, totalPages.value);
+  }
+
+  return getPaginationPages(
+    currentPage.value,
+    totalPages.value,
+    MOBILE_LEFT_COUNT,
+    MOBILE_RIGHT_COUNT,
+  );
+});
 
 const canGoPrevious = computed(() => currentPage.value > 1);
 
@@ -70,10 +87,11 @@ function goNext() {
       <Button
         variant="ghost"
         size="sm"
+        aria-label="Previous page"
         :disabled="!canGoPrevious"
         @click="goPrevious"
       >
-        Previous
+        <ChevronLeftIcon class="size-4" />
       </Button>
 
       <template
@@ -106,10 +124,11 @@ function goNext() {
       <Button
         variant="ghost"
         size="sm"
+        aria-label="Next page"
         :disabled="!canGoNext"
         @click="goNext"
       >
-        Next
+        <ChevronRightIcon class="size-4" />
       </Button>
     </nav>
   </div>
