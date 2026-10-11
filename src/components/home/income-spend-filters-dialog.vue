@@ -59,9 +59,9 @@ defineExpose({
 
     <div class="grid gap-4 sm:grid-cols-2">
       <DateRangeFields
-        id-prefix="income-spend-filter"
         v-model:issued-from="draft.issuedFrom"
         v-model:issued-to="draft.issuedTo"
+        id-prefix="income-spend-filter"
       />
     </div>
 

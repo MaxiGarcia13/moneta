@@ -23,9 +23,9 @@ const transactionsStore = useTransactionsStore();
     />
 
     <DateRangeFields
-      id-prefix="filter-issued"
       v-model:issued-from="transactionsStore.draftFilters.issuedFrom"
       v-model:issued-to="transactionsStore.draftFilters.issuedTo"
+      id-prefix="filter-issued"
     />
   </div>
 </template>
