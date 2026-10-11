@@ -34,14 +34,14 @@ function openFiltersDialog() {
     <Button
       variant="ghost"
       size="sm"
-      class="relative shrink-0 h-11.5 rounded-l-none"
+      class="relative shrink-0 h-10 rounded-l-none"
       aria-label="Open filters"
       @click="openFiltersDialog"
     >
       <FilterIcon class="size-5" />
       <span
         v-if="activeDialogFilterCount > 0"
-        class="absolute -top-1.5 -right-1.5 flex size-5 items-center justify-center rounded-full bg-accent-soft text-xs font-medium text-foreground ring-1 ring-accent-border"
+        class="absolute -top-2 -right-2 flex size-5 items-center justify-center rounded-full bg-accent-soft text-xs font-medium text-foreground ring-1 ring-accent-border"
       >
         {{ activeDialogFilterCount }}
       </span>

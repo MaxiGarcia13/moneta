@@ -50,7 +50,7 @@ function toggleRow(index: number, event: Event) {
     <table class="w-full min-w-150 border-collapse text-left text-sm">
       <TransactionTableHeader>
         <template #leading>
-          <th class="w-10 px-3 py-3">
+          <th class="w-10 px-2 py-2">
             <input
               type="checkbox"
               class="size-4 cursor-pointer accent-accent disabled:cursor-not-allowed"
@@ -75,7 +75,7 @@ function toggleRow(index: number, event: Event) {
           truncate-title
         >
           <template #leading>
-            <td class="px-3 py-3">
+            <td class="px-2 py-2">
               <input
                 type="checkbox"
                 class="size-4 cursor-pointer accent-accent disabled:cursor-not-allowed"

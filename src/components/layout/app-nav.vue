@@ -18,14 +18,14 @@ const navItems = computed(() =>
 
 <template>
   <nav
-    class="flex items-center gap-1"
+    class="flex items-center gap-2"
     aria-label="Main"
   >
     <RouterLink
       v-for="item in navItems"
       :key="item.to"
       :to="item.to"
-      class="rounded-lg px-3 py-1.5 text-sm text-muted"
+      class="rounded-xl px-4 py-2 text-sm text-muted"
       active-class="font-bold text-foreground!"
     >
       {{ item.label }}

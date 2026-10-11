@@ -20,7 +20,7 @@ function openDialog() {
 <template>
   <Button
     size="sm"
-    class="h-11.5"
+    class="h-10"
     @click="openDialog"
   >
     <slot name="icon" />

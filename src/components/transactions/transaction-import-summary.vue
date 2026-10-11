@@ -13,7 +13,7 @@ const emit = defineEmits<{
 </script>
 
 <template>
-  <div class="flex items-center justify-between gap-3 text-sm">
+  <div class="flex items-center justify-between gap-4 text-sm">
     <p class="truncate text-muted">
       {{ fileName }} · {{ newCount }} new
       <template v-if="duplicateCount > 0">

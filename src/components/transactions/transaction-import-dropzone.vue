@@ -49,10 +49,10 @@ function openFilePicker() {
 </script>
 
 <template>
-  <div class="flex flex-col gap-3">
+  <div class="flex flex-col gap-4">
     <button
       type="button"
-      class="flex cursor-pointer flex-col items-center justify-center gap-3 rounded-xl border border-dashed border-border px-6 py-10 text-center transition-colors hover:border-accent-border hover:bg-accent-soft focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+      class="flex cursor-pointer flex-col items-center justify-center gap-4 rounded-xl border border-dashed border-border px-6 py-10 text-center transition-colors hover:border-accent-border hover:bg-accent-soft focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
       :class="isDragging ? 'border-accent-border bg-accent-soft' : ''"
       @click="openFilePicker"
       @dragenter.prevent="isDragging = true"
@@ -61,7 +61,7 @@ function openFilePicker() {
       @drop.prevent="onDrop"
     >
       <UploadIcon class="size-8 text-muted" />
-      <div class="flex flex-col gap-1">
+      <div class="flex flex-col gap-2">
         <p class="font-medium">
           Drop a file here or click to browse
         </p>

@@ -20,19 +20,19 @@ const skeletonRows = Array.from({ length: SKELETON_ROW_COUNT }, (_, index) => in
           :key="row"
           class="border-t border-border"
         >
-          <td class="px-4 py-3">
+          <td class="px-4 py-2">
             <Skeleton class="h-4 w-20" />
           </td>
-          <td class="px-4 py-3">
+          <td class="px-4 py-2">
             <Skeleton class="h-4 w-36" />
           </td>
-          <td class="px-4 py-3">
+          <td class="px-4 py-2">
             <Skeleton class="h-4 w-16" />
           </td>
-          <td class="px-4 py-3">
+          <td class="px-4 py-2">
             <Skeleton class="h-4 w-24" />
           </td>
-          <td class="px-4 py-3 text-right">
+          <td class="px-4 py-2 text-right">
             <Skeleton class="inline-block h-4 w-16" />
           </td>
         </tr>

@@ -10,40 +10,40 @@ defineProps<{
 </script>
 
 <template>
-  <div class="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-    <div class="rounded-xl bg-surface px-4 py-3">
+  <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+    <div class="rounded-xl bg-surface p-4">
       <p class="text-sm text-muted">
         Income
       </p>
-      <p class="mt-1 font-heading text-xl text-accent">
+      <p class="mt-2 font-heading text-xl text-accent">
         {{ formatAmount(income) }}
       </p>
     </div>
 
-    <div class="rounded-xl bg-surface px-4 py-3">
+    <div class="rounded-xl bg-surface p-4">
       <p class="text-sm text-muted">
         Expenses
       </p>
-      <p class="mt-1 font-heading text-xl text-danger">
+      <p class="mt-2 font-heading text-xl text-danger">
         {{ formatAmount(expense) }}
       </p>
     </div>
 
-    <div class="rounded-xl bg-surface px-4 py-3">
+    <div class="rounded-xl bg-surface p-4">
       <p class="text-sm text-muted">
         Invested
       </p>
-      <p class="mt-1 font-heading text-xl text-investment">
+      <p class="mt-2 font-heading text-xl text-investment">
         {{ formatAmount(investment) }}
       </p>
     </div>
 
-    <div class="rounded-xl bg-surface px-4 py-3">
+    <div class="rounded-xl bg-surface p-4">
       <p class="text-sm text-muted">
         Net
       </p>
       <p
-        class="mt-1 font-heading text-xl"
+        class="mt-2 font-heading text-xl"
         :class="net >= 0 ? 'text-accent' : 'text-danger'"
       >
         {{ formatAmount(net) }}

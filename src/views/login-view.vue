@@ -25,7 +25,7 @@ async function onGithubClick() {
   <main
     class="relative flex min-h-screen flex-col items-center justify-center overflow-hidden px-6 py-12 text-center"
   >
-    <div class="relative flex max-w-sm flex-col items-center gap-5 animate-[fade-up_0.5s_ease-out]">
+    <div class="relative flex max-w-sm flex-col items-center gap-6 animate-[fade-up_0.5s_ease-out]">
       <AppBrand size="lg" />
 
       <GithubSignInButton

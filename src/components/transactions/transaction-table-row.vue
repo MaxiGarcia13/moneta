@@ -27,11 +27,11 @@ withDefaults(
 <template>
   <tr class="border-t border-border">
     <slot name="leading" />
-    <td class="whitespace-nowrap px-4 py-3 text-muted">
+    <td class="whitespace-nowrap px-4 py-2 text-muted">
       {{ formatDate(issuedAt) }}
     </td>
     <td
-      class="px-4 py-3 font-medium"
+      class="px-4 py-2 font-medium"
       :class="truncateTitle ? 'max-w-64' : undefined"
     >
       <span
@@ -44,14 +44,14 @@ withDefaults(
       </template>
       <slot name="title-extra" />
     </td>
-    <td class="px-4 py-3 text-muted">
+    <td class="px-4 py-2 text-muted">
       {{ formatEnumLabel(type) }}
     </td>
-    <td class="px-4 py-3 text-muted">
+    <td class="px-4 py-2 text-muted">
       {{ category ? formatEnumLabel(category) : '—' }}
     </td>
     <td
-      class="px-4 py-3 text-right font-medium tabular-nums"
+      class="px-4 py-2 text-right font-medium tabular-nums"
       :class="transactionTypeAmountClass(type)"
     >
       {{ formatAmount(amount) }}

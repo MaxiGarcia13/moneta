@@ -22,7 +22,7 @@ withDefaults(
     :class="[
       variant === 'raised' ? 'bg-surface-raised' : 'bg-transparent',
       variant === 'danger' && 'text-danger! hover:border-danger/40! hover:bg-danger/10!',
-      size === 'sm' ? 'gap-2 rounded-lg px-3 py-1.5 text-sm' : 'gap-2.5 rounded-xl px-5 py-3',
+      size === 'sm' ? 'gap-2 rounded-xl px-4 py-2 text-sm' : 'gap-2 rounded-xl px-6 py-4',
     ]"
     :disabled="disabled"
   >

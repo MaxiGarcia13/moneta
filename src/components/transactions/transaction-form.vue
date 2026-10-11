@@ -101,7 +101,7 @@ defineExpose({
 <template>
   <form
     :id="formId"
-    class="flex flex-col gap-5"
+    class="flex flex-col gap-4"
     @submit.prevent="onSubmit"
   >
     <Input

@@ -8,7 +8,7 @@ import Skeleton from '@/components/ui/skeleton.vue';
     aria-busy="true"
     aria-label="Loading charts"
   >
-    <div class="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+    <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
       <Skeleton class="h-20" />
       <Skeleton class="h-20" />
       <Skeleton class="h-20" />

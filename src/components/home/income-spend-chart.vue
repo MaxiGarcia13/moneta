@@ -103,12 +103,12 @@ function openFiltersDialog() {
 
 <template>
   <section class="rounded-xl bg-surface p-4">
-    <div class="flex items-start justify-between gap-3">
+    <div class="flex items-start justify-between gap-4">
       <div class="min-w-0">
         <h2 class="text-lg font-heading">
           Income vs spend
         </h2>
-        <p class="mt-1 text-sm text-muted">
+        <p class="mt-2 text-sm text-muted">
           {{ rangeLabel }}
         </p>
       </div>
@@ -123,7 +123,7 @@ function openFiltersDialog() {
         <FilterIcon class="size-5" />
         <span
           v-if="!isDefaultRange"
-          class="absolute -top-1.5 -right-1.5 size-2 rounded-full bg-accent ring-2 ring-surface"
+          class="absolute -top-2 -right-2 size-2 rounded-full bg-accent ring-2 ring-surface"
         />
       </Button>
     </div>

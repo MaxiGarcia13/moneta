@@ -69,7 +69,7 @@ const hasData = computed(() => props.spend.values.some((value) => value > 0));
     <h2 class="text-lg font-heading">
       Expenses by category
     </h2>
-    <p class="mt-1 text-sm text-muted">
+    <p class="mt-2 text-sm text-muted">
       Where spending went
     </p>
 

@@ -10,7 +10,7 @@ import Menu from '@/components/ui/menu.vue';
     <template #trigger="{ open, toggle }">
       <button
         type="button"
-        class="inline-flex items-center gap-1 rounded-full text-muted transition-opacity hover:opacity-80 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent cursor-pointer"
+        class="inline-flex items-center gap-2 rounded-full text-muted transition-opacity hover:opacity-80 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent cursor-pointer"
         :aria-expanded="open"
         aria-haspopup="menu"
         aria-label="User menu"

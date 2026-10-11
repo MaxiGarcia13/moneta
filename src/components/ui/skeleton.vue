@@ -4,7 +4,7 @@ defineOptions({ inheritAttrs: false });
 
 <template>
   <div
-    class="animate-pulse rounded bg-surface-raised"
+    class="animate-pulse rounded-xl bg-surface-raised"
     v-bind="$attrs"
     aria-hidden="true"
   />

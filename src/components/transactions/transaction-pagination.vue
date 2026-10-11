@@ -64,7 +64,7 @@ function goNext() {
 
     <nav
       v-if="totalPages > 0"
-      class="flex items-center gap-1"
+      class="flex items-center gap-2"
       aria-label="Pagination"
     >
       <Button
