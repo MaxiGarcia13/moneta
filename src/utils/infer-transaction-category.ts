@@ -28,6 +28,8 @@ const CATEGORY_RULES: Array<{
       /\bbm\b/i,
       /coviran/i,
       /carrefour/i,
+      /alcampo/i,
+      /supermercado/i,
     ],
   },
   {
@@ -36,6 +38,7 @@ const CATEGORY_RULES: Array<{
       /balenoil/i,
       /feu\s*vert/i,
       /parkia/i,
+      /moeve/i,
     ],
   },
   {
@@ -50,24 +53,36 @@ const CATEGORY_RULES: Array<{
   {
     category: 'leisure',
     patterns: [
-      /\bbar\b/i,
       /glovo/i,
-      /\bg6\b/i,
-      /\bregma\b/i,
       /camping/i,
-      /gallofa/i,
     ],
   },
   {
     category: 'health_fitness',
     patterns: [
       /saravia\s*bartomioli/i,
+      /padel\s*club/i,
+      /\bg6\b/i,
+      /instituto\s*municipal\s*de\s*deportes/i,
     ],
   },
   {
     category: 'shopping',
     patterns: [
       /decathlon/i,
+      /adidas/i,
+    ],
+  },
+  {
+    category: 'food&drink',
+    patterns: [
+      /restaurante/i,
+      /\bregma\b/i,
+      /\bbar\b/i,
+      /gallofa/i,
+      /cpc\s*cant\s*sl/i,
+      /passarola/i,
+      /vacanze\s*romane/i,
     ],
   },
 ];

@@ -60,7 +60,7 @@ export interface Database {
     Enums: {
       category:
         | 'housing'
-        | 'utilities'
+        | 'food&drink'
         | 'groceries'
         | 'transportation'
         | 'health'
@@ -201,7 +201,7 @@ export const Constants = {
     Enums: {
       category: [
         'housing',
-        'utilities',
+        'food&drink',
         'groceries',
         'transportation',
         'health',
