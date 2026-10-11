@@ -4,12 +4,13 @@ import { formatAmount } from '@/utils/format-amount';
 defineProps<{
   income: number;
   expense: number;
+  investment: number;
   net: number;
 }>();
 </script>
 
 <template>
-  <div class="grid gap-3 sm:grid-cols-3">
+  <div class="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
     <div class="rounded-xl bg-surface px-4 py-3">
       <p class="text-sm text-muted">
         Income
@@ -25,6 +26,15 @@ defineProps<{
       </p>
       <p class="mt-1 font-heading text-xl text-danger">
         {{ formatAmount(expense) }}
+      </p>
+    </div>
+
+    <div class="rounded-xl bg-surface px-4 py-3">
+      <p class="text-sm text-muted">
+        Invested
+      </p>
+      <p class="mt-1 font-heading text-xl text-investment">
+        {{ formatAmount(investment) }}
       </p>
     </div>
 

@@ -24,6 +24,7 @@ const CATEGORY_RULES: Array<{
       /\blupa\b/i,
       /mercadona/i,
       /\blidl\b/i,
+      /\baldi\b/i,
       /\bbm\b/i,
       /coviran/i,
       /carrefour/i,
@@ -38,6 +39,15 @@ const CATEGORY_RULES: Array<{
     ],
   },
   {
+    category: 'transportation',
+    patterns: [
+      /\btus\b/i,
+      /\balsa\b/i,
+      /vueling/i,
+      /iberia/i,
+    ],
+  },
+  {
     category: 'leisure',
     patterns: [
       /\bbar\b/i,
@@ -46,9 +56,6 @@ const CATEGORY_RULES: Array<{
       /\bregma\b/i,
       /camping/i,
       /gallofa/i,
-      /vueling/i,
-      /iberia/i,
-      /\balsa\b/i,
     ],
   },
   {

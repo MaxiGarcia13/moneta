@@ -50,6 +50,7 @@ const errorMessage = computed(() => {
         <HomeKpiRow
           :income="kpis.income"
           :expense="kpis.expense"
+          :investment="kpis.investment"
           :net="kpis.net"
         />
         <CategorySpendChart :spend="categorySpend" />

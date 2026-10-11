@@ -68,18 +68,22 @@ export function useHomeChartsQuery(
   const kpis = computed(() => {
     let income = 0;
     let expense = 0;
+    let investment = 0;
 
     for (const transaction of filteredTransactions.value) {
       if (transaction.type === 'income') {
         income += transaction.amount;
       } else if (transaction.type === 'expense') {
         expense += transaction.amount;
+      } else if (transaction.type === 'investment') {
+        investment += transaction.amount;
       }
     }
 
     return {
       income,
       expense,
+      investment,
       net: income - expense,
     };
   });
