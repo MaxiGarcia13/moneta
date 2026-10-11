@@ -36,7 +36,7 @@ export function formatMonthLabel(monthKey: string) {
 
 export function getDefaultHomeDateRange(now = new Date()) {
   const issuedTo = toDateOnlyLocal(now);
-  const from = new Date(now.getFullYear(), now.getMonth() - 11, 1);
+  const from = new Date(now.getFullYear(), now.getMonth() - 2, 1);
   const issuedFrom = toDateOnlyLocal(from);
 
   return { issuedFrom, issuedTo };
