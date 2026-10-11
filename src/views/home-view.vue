@@ -32,7 +32,7 @@ const errorMessage = computed(() => {
 <template>
   <AppHeader />
 
-  <main class="py-8">
+  <main class="pt-8 pb-24 md:pb-8">
     <div class="flex min-h-0 flex-1 flex-col gap-6 animate-[fade-up_0.5s_ease-out]">
       <HomeChartsFilters v-model="filters" />
 

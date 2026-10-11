@@ -8,7 +8,7 @@ const skeletonRows = Array.from({ length: SKELETON_ROW_COUNT }, (_, index) => in
 
 <template>
   <div
-    class="min-h-0 flex-1 overflow-auto rounded-xl border border-border"
+    class="min-h-0 min-w-0 flex-1 overflow-x-auto overflow-y-auto rounded-xl border border-border"
     aria-busy="true"
     aria-label="Loading transactions"
   >

@@ -9,7 +9,7 @@ defineProps<{
 </script>
 
 <template>
-  <div class="min-h-0 flex-1 overflow-auto rounded-xl border border-border">
+  <div class="min-h-0 min-w-0 flex-1 overflow-x-auto overflow-y-auto rounded-xl border border-border">
     <table class="w-full min-w-150 border-collapse text-left text-sm">
       <TransactionTableHeader />
       <tbody>
