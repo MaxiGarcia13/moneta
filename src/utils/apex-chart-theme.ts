@@ -1,6 +1,7 @@
 import type { ApexOptions } from 'apexcharts';
 
 export const CHART_COLOR_SPENT = '#f07178';
+export const CHART_COLOR_INVESTED = '#d4a574';
 export const CHART_COLOR_REMAINING = '#3dd6c6';
 
 export const CHART_CATEGORY_COLORS = [

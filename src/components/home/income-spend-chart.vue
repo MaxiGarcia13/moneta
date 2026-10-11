@@ -10,6 +10,7 @@ import Skeleton from '@/components/ui/skeleton.vue';
 import { useIncomeSpendCashflowQuery } from '@/composables/use-income-spend-cashflow-query';
 import { useIncomeSpendFilters } from '@/composables/use-income-spend-filters';
 import {
+  CHART_COLOR_INVESTED,
   CHART_COLOR_REMAINING,
   CHART_COLOR_SPENT,
   createBaseChartOptions,
@@ -33,6 +34,7 @@ const filtersDialogRef = useTemplateRef<{
 
 const series = computed(() => [
   { name: 'Spent', data: monthlyCashflow.value.expense },
+  { name: 'Invested', data: monthlyCashflow.value.investment },
   { name: 'Remaining', data: monthlyCashflow.value.remaining },
 ]);
 
@@ -49,7 +51,7 @@ const options = computed<ApexOptions>(() =>
         borderRadiusApplication: 'end',
       },
     },
-    colors: [CHART_COLOR_SPENT, CHART_COLOR_REMAINING],
+    colors: [CHART_COLOR_SPENT, CHART_COLOR_INVESTED, CHART_COLOR_REMAINING],
     dataLabels: { enabled: false },
     xaxis: {
       categories: monthlyCashflow.value.months,
@@ -71,7 +73,8 @@ const options = computed<ApexOptions>(() =>
 
 const hasData = computed(() =>
   monthlyCashflow.value.income.some((value) => value > 0)
-  || monthlyCashflow.value.expense.some((value) => value > 0),
+  || monthlyCashflow.value.expense.some((value) => value > 0)
+  || monthlyCashflow.value.investment.some((value) => value > 0),
 );
 
 const chartWidth = computed(() => {
@@ -81,7 +84,7 @@ const chartWidth = computed(() => {
 
 const rangeLabel = computed(() => {
   if (isDefaultRange.value) {
-    return 'Last 12 months, spent against income';
+    return 'Last 12 months, spent and invested against income';
   }
 
   return `${formatDateOnly(filters.value.issuedFrom)} – ${formatDateOnly(filters.value.issuedTo)}`;

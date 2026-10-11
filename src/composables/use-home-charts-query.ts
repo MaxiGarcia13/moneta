@@ -62,7 +62,7 @@ export function useHomeChartsQuery(
       income,
       expense,
       investment,
-      net: income - expense,
+      net: income - expense - investment,
     };
   });
 
