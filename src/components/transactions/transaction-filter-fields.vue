@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import CategorySelect from '@/components/transactions/category-select.vue';
 import TransactionTypeSelect from '@/components/transactions/transaction-type-select.vue';
-import Input from '@/components/ui/input.vue';
+import DateRangeFields from '@/components/ui/date-range-fields.vue';
 import { useTransactionsStore } from '@/stores/transactions';
 
 const transactionsStore = useTransactionsStore();
@@ -22,18 +22,10 @@ const transactionsStore = useTransactionsStore();
       include-uncategorized
     />
 
-    <Input
-      id="filter-issued-from"
-      v-model="transactionsStore.draftFilters.issuedFrom"
-      label="From"
-      type="date"
-    />
-
-    <Input
-      id="filter-issued-to"
-      v-model="transactionsStore.draftFilters.issuedTo"
-      label="To"
-      type="date"
+    <DateRangeFields
+      id-prefix="filter-issued"
+      v-model:issued-from="transactionsStore.draftFilters.issuedFrom"
+      v-model:issued-to="transactionsStore.draftFilters.issuedTo"
     />
   </div>
 </template>

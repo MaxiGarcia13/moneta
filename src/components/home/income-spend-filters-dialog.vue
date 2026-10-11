@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import type { IncomeSpendFilters } from '@/composables/use-income-spend-filters';
 import { reactive, useTemplateRef } from 'vue';
+import DateRangeFields from '@/components/ui/date-range-fields.vue';
 import Dialog from '@/components/ui/dialog.vue';
 import FiltersDialogActions from '@/components/ui/filters-dialog-actions.vue';
-import Input from '@/components/ui/input.vue';
 import { getDefaultIncomeSpendDateRange } from '@/utils/month-bounds';
 
 const filters = defineModel<IncomeSpendFilters>({ required: true });
@@ -58,17 +58,10 @@ defineExpose({
     </template>
 
     <div class="grid gap-4 sm:grid-cols-2">
-      <Input
-        id="income-spend-filter-from"
-        v-model="draft.issuedFrom"
-        label="From"
-        type="date"
-      />
-      <Input
-        id="income-spend-filter-to"
-        v-model="draft.issuedTo"
-        label="To"
-        type="date"
+      <DateRangeFields
+        id-prefix="income-spend-filter"
+        v-model:issued-from="draft.issuedFrom"
+        v-model:issued-to="draft.issuedTo"
       />
     </div>
 

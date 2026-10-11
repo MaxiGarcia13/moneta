@@ -1,25 +1,17 @@
 <script setup lang="ts">
 import type { HomeChartsFilters } from '@/composables/use-home-charts-filters';
 import CategorySelect from '@/components/transactions/category-select.vue';
-import Input from '@/components/ui/input.vue';
+import DateRangeFields from '@/components/ui/date-range-fields.vue';
 
 const filters = defineModel<HomeChartsFilters>({ required: true });
 </script>
 
 <template>
   <div class="grid gap-4 grid-cols-3">
-    <Input
-      id="home-filter-issued-from"
-      v-model="filters.issuedFrom"
-      label="From"
-      type="date"
-    />
-
-    <Input
-      id="home-filter-issued-to"
-      v-model="filters.issuedTo"
-      label="To"
-      type="date"
+    <DateRangeFields
+      id-prefix="home-filter-issued"
+      v-model:issued-from="filters.issuedFrom"
+      v-model:issued-to="filters.issuedTo"
     />
 
     <CategorySelect
