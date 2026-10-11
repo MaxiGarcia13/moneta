@@ -31,14 +31,14 @@
   }
 
   #app {
-    @apply flex min-h-screen flex-col;
+    @apply flex min-h-screen min-w-0 flex-col overflow-x-hidden;
   }
 
   main {
     max-width: 900px;
     width: 100%;
     margin: 0 auto;
-    @apply flex min-h-0 flex-1 flex-col px-6 py-2;
+    @apply flex min-h-0 min-w-0 flex-1 flex-col px-6 py-2;
   }
 
   h1,
