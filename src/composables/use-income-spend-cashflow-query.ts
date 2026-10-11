@@ -1,54 +1,25 @@
 import type { MaybeRefOrGetter } from 'vue';
 import type { IncomeSpendFilters } from '@/composables/use-income-spend-filters';
-import { useQuery } from '@tanstack/vue-query';
 import { computed, toValue } from 'vue';
-import { TRANSACTIONS_QUERY_KEY } from '@/composables/use-transactions-query';
+import { useTransactionsInIssuedRangeQuery } from '@/composables/use-transactions-in-issued-range-query';
 import { aggregateMonthlyCashflow } from '@/domain/transactions';
-import { listTransactionsInIssuedRange } from '@/services/transactions';
-import {
-  endOfLocalDayIso,
-  startOfLocalDayIso,
-} from '@/utils/local-day-bounds';
 import { getDefaultIncomeSpendDateRange } from '@/utils/month-bounds';
+import { resolveIssuedDateRange } from '@/utils/resolve-issued-date-range';
 
-export const INCOME_SPEND_CASHFLOW_QUERY_KEY = 'income-spend-cashflow' as const;
-
-function resolveDateRange(filters: IncomeSpendFilters) {
-  const defaults = getDefaultIncomeSpendDateRange();
-  const issuedFrom = filters.issuedFrom || defaults.issuedFrom;
-  const issuedTo = filters.issuedTo || defaults.issuedTo;
-
-  return {
-    issuedFrom,
-    issuedTo,
-    issuedFromIso: startOfLocalDayIso(issuedFrom),
-    issuedToIso: endOfLocalDayIso(issuedTo),
-  };
-}
+const INCOME_SPEND_CASHFLOW_QUERY_KEY = 'income-spend-cashflow' as const;
 
 export function useIncomeSpendCashflowQuery(
   filters: MaybeRefOrGetter<IncomeSpendFilters>,
 ) {
-  const dateRange = computed(() => resolveDateRange(toValue(filters)));
+  const dateRange = computed(() => resolveIssuedDateRange(
+    toValue(filters),
+    getDefaultIncomeSpendDateRange(),
+  ));
 
-  const queryKeyRange = computed(() => ({
-    issuedFrom: dateRange.value.issuedFromIso,
-    issuedTo: dateRange.value.issuedToIso,
-  }));
-
-  const query = useQuery({
-    queryKey: [
-      TRANSACTIONS_QUERY_KEY,
-      INCOME_SPEND_CASHFLOW_QUERY_KEY,
-      queryKeyRange,
-    ],
-    queryFn: () => listTransactionsInIssuedRange(
-      queryKeyRange.value.issuedFrom,
-      queryKeyRange.value.issuedTo,
-    ),
-    refetchOnWindowFocus: true,
-    staleTime: 1000 * 60 * 30,
-  });
+  const query = useTransactionsInIssuedRangeQuery(
+    INCOME_SPEND_CASHFLOW_QUERY_KEY,
+    dateRange,
+  );
 
   const monthlyCashflow = computed(() =>
     aggregateMonthlyCashflow(
