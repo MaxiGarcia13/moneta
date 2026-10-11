@@ -5,12 +5,13 @@ import type {
   TransactionType,
 } from '@/domain/transactions';
 import { useQueryClient } from '@tanstack/vue-query';
-import { reactive, ref } from 'vue';
+import { reactive } from 'vue';
 import CategorySelect from '@/components/transactions/category-select.vue';
 import TransactionTypeSelect from '@/components/transactions/transaction-type-select.vue';
 import Button from '@/components/ui/button.vue';
 import Input from '@/components/ui/input.vue';
 import Textarea from '@/components/ui/textarea.vue';
+import { useAsyncSubmit } from '@/composables/use-async-submit';
 import { TRANSACTIONS_QUERY_KEY } from '@/composables/use-transactions-query';
 import { createTransaction } from '@/services/transactions';
 import { dateTimeLocalToIso } from '@/utils/date-time-local-to-iso';
@@ -43,8 +44,13 @@ const form = reactive({
 });
 
 const fieldErrors = reactive<Partial<Record<keyof CreateTransactionInput, string>>>({});
-const isSubmitting = ref(false);
-const submitError = ref<string | null>(null);
+
+const {
+  isSubmitting,
+  submitError,
+  clearSubmitError,
+  runSubmit,
+} = useAsyncSubmit('Failed to save transaction');
 
 function validate(): boolean {
   fieldErrors.title = form.title.trim() ? undefined : 'Title is required';
@@ -73,24 +79,17 @@ function toCreateInput(): CreateTransactionInput {
 }
 
 async function onSubmit() {
-  submitError.value = null;
+  clearSubmitError();
 
   if (!validate()) {
     return;
   }
 
-  isSubmitting.value = true;
-
-  try {
+  await runSubmit(async () => {
     await createTransaction(toCreateInput());
     await queryClient.invalidateQueries({ queryKey: [TRANSACTIONS_QUERY_KEY] });
     emit('success');
-  } catch (error) {
-    submitError.value
-      = error instanceof Error ? error.message : 'Failed to save transaction';
-  } finally {
-    isSubmitting.value = false;
-  }
+  });
 }
 
 defineExpose({
