@@ -56,5 +56,6 @@ withDefaults(
     >
       {{ formatAmount(amount) }}
     </td>
+    <slot name="trailing" />
   </tr>
 </template>
