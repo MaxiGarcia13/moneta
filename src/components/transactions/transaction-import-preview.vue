@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import type { CreateTransactionInput } from '@/domain/transactions';
+import type { TransactionFormInput } from '@/domain/transactions';
 import { computed } from 'vue';
 import TransactionTableHeader from '@/components/transactions/transaction-table-header.vue';
 import TransactionTableRow from '@/components/transactions/transaction-table-row.vue';
 
 const props = defineProps<{
-  movements: CreateTransactionInput[];
+  movements: TransactionFormInput[];
   duplicates: boolean[];
 }>();
 

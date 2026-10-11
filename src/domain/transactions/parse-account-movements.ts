@@ -1,4 +1,4 @@
-import type { CreateTransactionInput } from './transaction-form';
+import type { TransactionFormInput } from './transaction-form';
 import { normalizeWhitespace } from '@/utils/normalize-whitespace';
 import { parseSpanishAmount } from '@/utils/parse-spanish-amount';
 import { parseSpanishDateToIso } from '@/utils/parse-spanish-date';
@@ -38,7 +38,7 @@ function isHeaderRow(cells: Element[]) {
 function parseMovementRow(
   cells: Element[],
   indexes: ReturnType<typeof findHeaderIndexes>,
-): CreateTransactionInput | null {
+): TransactionFormInput | null {
   const operationDate = cellText(cells[indexes.operationDate]);
   const concept = cellText(cells[indexes.concept]);
   const amountText = cellText(cells[indexes.amount]);
@@ -59,12 +59,12 @@ function parseMovementRow(
   };
 }
 
-export function parseAccountMovements(html: string): CreateTransactionInput[] {
+export function parseAccountMovements(html: string): TransactionFormInput[] {
   const document = new DOMParser().parseFromString(html, 'text/html');
   const rows = Array.from(document.querySelectorAll('tr'));
 
   let indexes: ReturnType<typeof findHeaderIndexes> | null = null;
-  const movements: CreateTransactionInput[] = [];
+  const movements: TransactionFormInput[] = [];
 
   for (const row of rows) {
     const cells = Array.from(row.querySelectorAll('td'));

@@ -1,9 +1,9 @@
-import type { CreateTransactionInput } from '@/domain/transactions';
+import type { TransactionFormInput } from '@/domain/transactions';
 import { requireUserId } from '@/services/transactions/require-user-id';
 import { supabase } from '@/supabase/client';
 
 export async function createTransactions(
-  inputs: CreateTransactionInput[],
+  inputs: TransactionFormInput[],
 ) {
   if (inputs.length === 0) {
     return;

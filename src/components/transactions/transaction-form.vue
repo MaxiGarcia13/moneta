@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type {
-  CreateTransactionInput,
   TransactionCategory,
+  TransactionFormInput,
   TransactionType,
 } from '@/domain/transactions';
 import { useQueryClient } from '@tanstack/vue-query';
@@ -43,7 +43,7 @@ const form = reactive({
   issued_at: toDateTimeLocalValue(),
 });
 
-const fieldErrors = reactive<Partial<Record<keyof CreateTransactionInput, string>>>({});
+const fieldErrors = reactive<Partial<Record<keyof TransactionFormInput, string>>>({});
 
 const {
   isSubmitting,
@@ -67,7 +67,7 @@ function validate(): boolean {
     && !fieldErrors.issued_at;
 }
 
-function toCreateInput(): CreateTransactionInput {
+function toFormInput(): TransactionFormInput {
   return {
     title: form.title.trim(),
     amount: Number(form.amount),
@@ -86,7 +86,7 @@ async function onSubmit() {
   }
 
   await runSubmit(async () => {
-    await createTransaction(toCreateInput());
+    await createTransaction(toFormInput());
     await queryClient.invalidateQueries({ queryKey: [TRANSACTIONS_QUERY_KEY] });
     emit('success');
   });

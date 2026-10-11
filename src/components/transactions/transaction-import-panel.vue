@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { CreateTransactionInput } from '@/domain/transactions';
+import type { TransactionFormInput } from '@/domain/transactions';
 import { useQueryClient } from '@tanstack/vue-query';
 import { computed, ref } from 'vue';
 import TransactionImportDropzone from '@/components/transactions/transaction-import-dropzone.vue';
@@ -28,7 +28,7 @@ const emit = defineEmits<{
 
 const queryClient = useQueryClient();
 
-const movements = ref<CreateTransactionInput[]>([]);
+const movements = ref<TransactionFormInput[]>([]);
 const selected = ref<boolean[]>([]);
 const duplicates = ref<boolean[]>([]);
 const parseError = ref<string | null>(null);
@@ -69,7 +69,7 @@ function reset() {
   fileName.value = null;
 }
 
-async function detectDuplicates(parsed: CreateTransactionInput[]) {
+async function detectDuplicates(parsed: TransactionFormInput[]) {
   const issuedAts = parsed.map((movement) => movement.issued_at);
   const minIssuedAt = issuedAts.reduce((min, value) =>
     value < min ? value : min);

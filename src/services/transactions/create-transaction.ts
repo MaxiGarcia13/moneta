@@ -1,8 +1,8 @@
-import type { CreateTransactionInput } from '@/domain/transactions';
+import type { TransactionFormInput } from '@/domain/transactions';
 import { createTransactions } from '@/services/transactions/create-transactions';
 
 export async function createTransaction(
-  input: CreateTransactionInput,
+  input: TransactionFormInput,
 ) {
   await createTransactions([input]);
 }
