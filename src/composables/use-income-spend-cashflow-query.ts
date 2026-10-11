@@ -9,12 +9,12 @@ import {
   endOfLocalDayIso,
   startOfLocalDayIso,
 } from '@/utils/local-day-bounds';
-import { getDefaultHomeDateRange } from '@/utils/month-bounds';
+import { getDefaultIncomeSpendDateRange } from '@/utils/month-bounds';
 
 export const INCOME_SPEND_CASHFLOW_QUERY_KEY = 'income-spend-cashflow' as const;
 
 function resolveDateRange(filters: IncomeSpendFilters) {
-  const defaults = getDefaultHomeDateRange();
+  const defaults = getDefaultIncomeSpendDateRange();
   const issuedFrom = filters.issuedFrom || defaults.issuedFrom;
   const issuedTo = filters.issuedTo || defaults.issuedTo;
 

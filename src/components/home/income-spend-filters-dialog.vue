@@ -4,7 +4,7 @@ import { reactive, useTemplateRef } from 'vue';
 import Dialog from '@/components/ui/dialog.vue';
 import FiltersDialogActions from '@/components/ui/filters-dialog-actions.vue';
 import Input from '@/components/ui/input.vue';
-import { getDefaultHomeDateRange } from '@/utils/month-bounds';
+import { getDefaultIncomeSpendDateRange } from '@/utils/month-bounds';
 
 const filters = defineModel<IncomeSpendFilters>({ required: true });
 
@@ -37,7 +37,7 @@ function applyFilters() {
 }
 
 function clearFilters() {
-  const defaults = getDefaultHomeDateRange();
+  const defaults = getDefaultIncomeSpendDateRange();
   draft.issuedFrom = defaults.issuedFrom;
   draft.issuedTo = defaults.issuedTo;
 }

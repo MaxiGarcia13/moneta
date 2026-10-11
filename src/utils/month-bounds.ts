@@ -34,12 +34,20 @@ export function formatMonthLabel(monthKey: string) {
   }).format(new Date(year, month - 1, 1));
 }
 
-export function getDefaultHomeDateRange(now = new Date()) {
+function getDateRangeFromMonthsAgo(monthsAgo: number, now = new Date()) {
   const issuedTo = toDateOnlyLocal(now);
-  const from = new Date(now.getFullYear(), now.getMonth() - 2, 1);
+  const from = new Date(now.getFullYear(), now.getMonth() - monthsAgo, 1);
   const issuedFrom = toDateOnlyLocal(from);
 
   return { issuedFrom, issuedTo };
+}
+
+export function getDefaultHomeDateRange(now = new Date()) {
+  return getDateRangeFromMonthsAgo(2, now);
+}
+
+export function getDefaultIncomeSpendDateRange(now = new Date()) {
+  return getDateRangeFromMonthsAgo(11, now);
 }
 
 export function listMonthKeysInRange(issuedFrom: string, issuedTo: string) {

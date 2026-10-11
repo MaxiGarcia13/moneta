@@ -16,6 +16,8 @@ import {
 import { formatAmount } from '@/utils/format-amount';
 import { formatDateOnly } from '@/utils/format-date-only';
 
+const MONTH_COLUMN_WIDTH_PX = 56;
+
 const { filters, isDefaultRange } = useIncomeSpendFilters();
 const {
   isPending,
@@ -70,6 +72,11 @@ const hasData = computed(() =>
   monthlyCashflow.value.income.some((value) => value > 0)
   || monthlyCashflow.value.expense.some((value) => value > 0),
 );
+
+const chartWidth = computed(() => {
+  const monthCount = monthlyCashflow.value.months.length;
+  return `max(100%, ${monthCount * MONTH_COLUMN_WIDTH_PX}px)`;
+});
 
 const rangeLabel = computed(() => {
   if (isDefaultRange.value) {
@@ -148,13 +155,18 @@ function openFiltersDialog() {
       No transactions in this range
     </p>
 
-    <VueApexCharts
+    <div
       v-else
-      class="mt-4"
-      type="bar"
-      height="320"
-      :options="options"
-      :series="series"
-    />
+      class="mt-4 overflow-x-auto overscroll-x-contain"
+    >
+      <div :style="{ width: chartWidth }">
+        <VueApexCharts
+          type="bar"
+          height="320"
+          :options="options"
+          :series="series"
+        />
+      </div>
+    </div>
   </section>
 </template>

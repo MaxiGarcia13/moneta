@@ -8,7 +8,7 @@ const filters = defineModel<HomeChartsFilters>({ required: true });
 </script>
 
 <template>
-  <div class="grid gap-4 sm:grid-cols-3">
+  <div class="grid gap-4 grid-cols-3">
     <Input
       id="home-filter-issued-from"
       v-model="filters.issuedFrom"

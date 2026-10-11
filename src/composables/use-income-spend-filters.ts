@@ -1,5 +1,5 @@
 import { computed, ref } from 'vue';
-import { getDefaultHomeDateRange } from '@/utils/month-bounds';
+import { getDefaultIncomeSpendDateRange } from '@/utils/month-bounds';
 
 export interface IncomeSpendFilters {
   issuedFrom: string;
@@ -7,14 +7,14 @@ export interface IncomeSpendFilters {
 }
 
 function createDefaultFilters(): IncomeSpendFilters {
-  return getDefaultHomeDateRange();
+  return getDefaultIncomeSpendDateRange();
 }
 
 export function useIncomeSpendFilters() {
   const filters = ref<IncomeSpendFilters>(createDefaultFilters());
 
   const isDefaultRange = computed(() => {
-    const defaults = getDefaultHomeDateRange();
+    const defaults = getDefaultIncomeSpendDateRange();
 
     return filters.value.issuedFrom === defaults.issuedFrom
       && filters.value.issuedTo === defaults.issuedTo;
