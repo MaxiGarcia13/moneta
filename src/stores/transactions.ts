@@ -5,7 +5,7 @@ import type {
   TransactionType,
 } from '@/domain/transactions';
 import { debounce } from '@maxigarcia/js-utils';
-import { defineStore } from 'pinia';
+import { acceptHMRUpdate, defineStore } from 'pinia';
 import { computed, reactive, ref, watch } from 'vue';
 import {
   endOfLocalDayIso,
@@ -108,3 +108,7 @@ export const useTransactionsStore = defineStore('transactions', () => {
     clearDialogFilters,
   };
 });
+
+if (import.meta.hot) {
+  import.meta.hot.accept(acceptHMRUpdate(useTransactionsStore, import.meta.hot));
+}
