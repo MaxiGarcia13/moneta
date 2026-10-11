@@ -34,7 +34,7 @@ const errorMessage = computed(() => {
 
   <main class="pt-8 pb-24 md:pb-8">
     <div class="flex min-h-0 flex-1 flex-col gap-6 animate-[fade-up_0.5s_ease-out]">
-      <HomeChartsFilters v-model="filters" hide-category-filter />
+      <HomeChartsFilters v-model="filters" />
 
       <HomeChartsSkeleton v-if="isPending" />
 

@@ -4,7 +4,6 @@ import { getDefaultHomeDateRange } from '@/utils/month-bounds';
 export interface HomeChartsFilters {
   issuedFrom: string;
   issuedTo: string;
-  category: string;
 }
 
 function createDefaultFilters(): HomeChartsFilters {
@@ -13,7 +12,6 @@ function createDefaultFilters(): HomeChartsFilters {
   return {
     issuedFrom,
     issuedTo,
-    category: '',
   };
 }
 
