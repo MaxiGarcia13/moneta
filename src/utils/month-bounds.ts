@@ -34,7 +34,7 @@ function getDateRangeFromMonthsAgo(monthsAgo: number, now = new Date()) {
 }
 
 export function getDefaultHomeDateRange(now = new Date()) {
-  return getDateRangeFromMonthsAgo(2, now);
+  return getDateRangeFromMonthsAgo(0, now);
 }
 
 export function getDefaultIncomeSpendDateRange(now = new Date()) {
