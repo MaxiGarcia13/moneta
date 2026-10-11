@@ -37,8 +37,9 @@ function applyFilters() {
 }
 
 function clearFilters() {
-  filters.value = getDefaultHomeDateRange();
-  dialogRef.value?.close();
+  const defaults = getDefaultHomeDateRange();
+  draft.issuedFrom = defaults.issuedFrom;
+  draft.issuedTo = defaults.issuedTo;
 }
 
 defineExpose({

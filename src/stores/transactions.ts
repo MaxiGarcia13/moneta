@@ -71,9 +71,7 @@ export const useTransactionsStore = defineStore('transactions', () => {
   function clearDialogFilters() {
     for (const key of DIALOG_FILTER_KEYS) {
       draftFilters[key] = '';
-      filters[key] = '';
     }
-    offset.value = 0;
   }
 
   const activeDialogFilterCount = computed(() => countSetDialogFilters(filters));

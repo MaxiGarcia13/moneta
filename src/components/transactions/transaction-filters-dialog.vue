@@ -24,7 +24,6 @@ function applyFilters() {
 
 function clearFilters() {
   transactionsStore.clearDialogFilters();
-  dialogRef.value?.close();
 }
 
 function onDialogClose() {
