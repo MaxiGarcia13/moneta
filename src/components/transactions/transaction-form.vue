@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type {
+  Transaction,
   TransactionCategory,
   TransactionFormInput,
   TransactionType,
@@ -13,16 +14,18 @@ import Input from '@/components/ui/input.vue';
 import Textarea from '@/components/ui/textarea.vue';
 import { useAsyncSubmit } from '@/composables/use-async-submit';
 import { TRANSACTIONS_QUERY_KEY } from '@/composables/use-transactions-query';
-import { createTransaction } from '@/services/transactions';
+import { createTransaction, updateTransaction } from '@/services/transactions';
 import { dateTimeLocalToIso } from '@/utils/date-time-local-to-iso';
 import { toDateTimeLocalValue } from '@/utils/to-date-time-local-value';
 
-withDefaults(
+const props = withDefaults(
   defineProps<{
+    transaction?: Transaction | null;
     hideSubmit?: boolean;
     formId?: string;
   }>(),
   {
+    transaction: null,
     hideSubmit: false,
     formId: undefined,
   },
@@ -35,12 +38,14 @@ const emit = defineEmits<{
 const queryClient = useQueryClient();
 
 const form = reactive({
-  title: '',
-  amount: '',
-  type: 'expense' as TransactionType,
-  category: '' as TransactionCategory | '',
-  description: '',
-  issued_at: toDateTimeLocalValue(),
+  title: props.transaction?.title ?? '',
+  amount: props.transaction ? String(props.transaction.amount) : '',
+  type: (props.transaction?.type ?? 'expense') as TransactionType,
+  category: (props.transaction?.category ?? '') as TransactionCategory | '',
+  description: props.transaction?.description ?? '',
+  issued_at: props.transaction
+    ? toDateTimeLocalValue(new Date(props.transaction.issued_at))
+    : toDateTimeLocalValue(),
 });
 
 const fieldErrors = reactive<Partial<Record<keyof TransactionFormInput, string>>>({});
@@ -86,7 +91,15 @@ async function onSubmit() {
   }
 
   await runSubmit(async () => {
-    await createTransaction(toFormInput());
+    const input = toFormInput();
+
+    if (props.transaction) {
+      await updateTransaction(props.transaction.id, input);
+    }
+    else {
+      await createTransaction(input);
+    }
+
     await queryClient.invalidateQueries({ queryKey: [TRANSACTIONS_QUERY_KEY] });
     emit('success');
   });
