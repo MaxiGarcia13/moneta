@@ -3,6 +3,7 @@ import { storeToRefs } from 'pinia';
 import { useTemplateRef } from 'vue';
 import FilterIcon from '@/components/icons/filter.vue';
 import TransactionFiltersDialog from '@/components/transactions/transaction-filters-dialog.vue';
+import Badge from '@/components/ui/badge.vue';
 import Button from '@/components/ui/button.vue';
 import Input from '@/components/ui/input.vue';
 import { useTransactionsStore } from '@/stores/transactions';
@@ -34,17 +35,14 @@ function openFiltersDialog() {
     <Button
       variant="ghost"
       size="sm"
-      class="relative shrink-0 h-10 rounded-l-none"
+      class="relative shrink-0 h-10.5 rounded-l-none"
       aria-label="Open filters"
       @click="openFiltersDialog"
     >
       <FilterIcon class="size-5" />
-      <span
-        v-if="activeDialogFilterCount > 0"
-        class="absolute -top-2 -right-2 flex size-5 items-center justify-center rounded-full bg-accent-soft text-xs font-medium text-foreground ring-1 ring-accent-border"
-      >
+      <Badge v-if="activeDialogFilterCount > 0">
         {{ activeDialogFilterCount }}
-      </span>
+      </Badge>
     </Button>
   </div>
 

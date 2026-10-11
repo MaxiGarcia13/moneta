@@ -4,6 +4,7 @@ import { computed, useTemplateRef } from 'vue';
 import VueApexCharts from 'vue3-apexcharts';
 import IncomeSpendFiltersDialog from '@/components/home/income-spend-filters-dialog.vue';
 import FilterIcon from '@/components/icons/filter.vue';
+import Badge from '@/components/ui/badge.vue';
 import Button from '@/components/ui/button.vue';
 import Skeleton from '@/components/ui/skeleton.vue';
 import { useIncomeSpendCashflowQuery } from '@/composables/use-income-spend-cashflow-query';
@@ -121,9 +122,9 @@ function openFiltersDialog() {
         @click="openFiltersDialog"
       >
         <FilterIcon class="size-5" />
-        <span
+        <Badge
           v-if="!isDefaultRange"
-          class="absolute -top-2 -right-2 size-2 rounded-full bg-accent ring-2 ring-surface"
+          variant="dot"
         />
       </Button>
     </div>
