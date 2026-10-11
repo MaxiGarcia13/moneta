@@ -2,7 +2,7 @@
 import type { HomeChartsFilters } from '@/composables/use-home-charts-filters';
 import Input from '@/components/ui/input.vue';
 import Select from '@/components/ui/select.vue';
-import { TRANSACTION_CATEGORY_OPTIONS } from '@/utils/transaction-select-options';
+import { TRANSACTION_CATEGORY_FILTER_OPTIONS } from '@/utils/transaction-select-options';
 
 const filters = defineModel<HomeChartsFilters>({ required: true });
 </script>
@@ -27,7 +27,7 @@ const filters = defineModel<HomeChartsFilters>({ required: true });
       id="home-filter-category"
       v-model="filters.category"
       label="Category"
-      :options="TRANSACTION_CATEGORY_OPTIONS"
+      :options="TRANSACTION_CATEGORY_FILTER_OPTIONS"
       empty-label="All"
     />
   </div>

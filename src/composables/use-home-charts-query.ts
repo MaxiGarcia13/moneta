@@ -4,6 +4,10 @@ import type { TransactionCategory } from '@/domain/transactions';
 import { useQuery } from '@tanstack/vue-query';
 import { computed, toValue } from 'vue';
 import { TRANSACTIONS_QUERY_KEY } from '@/composables/use-transactions-query';
+import {
+
+  UNCATEGORIZED_CATEGORY_FILTER,
+} from '@/domain/transactions';
 import { listTransactionsInIssuedRange } from '@/services/transactions';
 import { aggregateCategorySpend } from '@/utils/aggregate-category-spend';
 import {
@@ -58,6 +62,10 @@ export function useHomeChartsQuery(
 
     if (!category) {
       return items;
+    }
+
+    if (category === UNCATEGORIZED_CATEGORY_FILTER) {
+      return items.filter((transaction) => transaction.category === null);
     }
 
     return items.filter(

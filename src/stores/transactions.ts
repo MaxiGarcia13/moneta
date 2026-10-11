@@ -1,6 +1,6 @@
 import type {
+  CategoryFilterValue,
   ListTransactionsParams,
-  TransactionCategory,
   TransactionFilters,
   TransactionType,
 } from '@/domain/transactions';
@@ -81,7 +81,7 @@ export const useTransactionsStore = defineStore('transactions', () => {
     offset: offset.value,
     title: filters.title.trim() || undefined,
     category: filters.category
-      ? (filters.category as TransactionCategory)
+      ? (filters.category as CategoryFilterValue)
       : null,
     type: filters.type
       ? (filters.type as TransactionType)

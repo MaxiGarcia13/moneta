@@ -19,11 +19,17 @@ export interface TransactionFilters {
   issuedTo: string;
 }
 
+export const UNCATEGORIZED_CATEGORY_FILTER = 'uncategorized' as const;
+
+export type CategoryFilterValue =
+  | TransactionCategory
+  | typeof UNCATEGORIZED_CATEGORY_FILTER;
+
 export interface ListTransactionsParams {
   limit: number;
   offset: number;
   title?: string;
-  category?: TransactionCategory | null;
+  category?: CategoryFilterValue | null;
   type?: TransactionType | null;
   issuedFrom?: string | null;
   issuedTo?: string | null;

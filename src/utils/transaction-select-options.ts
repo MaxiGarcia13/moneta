@@ -1,6 +1,7 @@
 import {
   TRANSACTION_CATEGORIES,
   TRANSACTION_TYPES,
+  UNCATEGORIZED_CATEGORY_FILTER,
 } from '@/domain/transactions';
 import { formatEnumLabel } from '@/utils/format-enum-label';
 
@@ -15,3 +16,11 @@ export const TRANSACTION_CATEGORY_OPTIONS = TRANSACTION_CATEGORIES.map(
     label: formatEnumLabel(category),
   }),
 );
+
+export const TRANSACTION_CATEGORY_FILTER_OPTIONS = [
+  {
+    value: UNCATEGORIZED_CATEGORY_FILTER,
+    label: 'Uncategorized',
+  },
+  ...TRANSACTION_CATEGORY_OPTIONS,
+];

@@ -1,6 +1,7 @@
-import type {
-  ListTransactionsParams,
-  ListTransactionsResult,
+import type { ListTransactionsParams, ListTransactionsResult } from '@/domain/transactions';
+import {
+
+  UNCATEGORIZED_CATEGORY_FILTER,
 } from '@/domain/transactions';
 import { requireUserId } from '@/services/transactions/require-user-id';
 import { supabase } from '@/supabase/client';
@@ -23,7 +24,9 @@ export async function listTransactions(
     query = query.ilike('title', `%${title}%`);
   }
 
-  if (params.category) {
+  if (params.category === UNCATEGORIZED_CATEGORY_FILTER) {
+    query = query.is('category', null);
+  } else if (params.category) {
     query = query.eq('category', params.category);
   }
 

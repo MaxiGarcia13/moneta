@@ -3,7 +3,7 @@ import Input from '@/components/ui/input.vue';
 import Select from '@/components/ui/select.vue';
 import { useTransactionsStore } from '@/stores/transactions';
 import {
-  TRANSACTION_CATEGORY_OPTIONS,
+  TRANSACTION_CATEGORY_FILTER_OPTIONS,
   TRANSACTION_TYPE_OPTIONS,
 } from '@/utils/transaction-select-options';
 
@@ -24,7 +24,7 @@ const transactionsStore = useTransactionsStore();
       id="filter-category"
       v-model="transactionsStore.draftFilters.category"
       label="Category"
-      :options="TRANSACTION_CATEGORY_OPTIONS"
+      :options="TRANSACTION_CATEGORY_FILTER_OPTIONS"
       empty-label="All"
     />
 
