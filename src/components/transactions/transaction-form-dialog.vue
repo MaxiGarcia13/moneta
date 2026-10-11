@@ -1,10 +1,11 @@
 <script setup lang="ts">
-import { computed, ref, useTemplateRef } from 'vue';
+import type { Transaction } from '@/domain/transactions';
+import { computed, ref, useId, useTemplateRef } from 'vue';
 import TransactionForm from '@/components/transactions/transaction-form.vue';
 import Button from '@/components/ui/button.vue';
 import Dialog from '@/components/ui/dialog.vue';
 
-const FORM_ID = 'transaction-create-form';
+const formId = useId();
 
 const dialogRef = useTemplateRef<{
   showModal: () => void;
@@ -16,10 +17,13 @@ const formRef = useTemplateRef<{
 }>('form');
 
 const formKey = ref(0);
+const transaction = ref<Transaction | null>(null);
 
+const isEditing = computed(() => transaction.value != null);
 const isSubmitting = computed(() => formRef.value?.isSubmitting ?? false);
 
-function showModal() {
+function showModal(nextTransaction?: Transaction | null) {
+  transaction.value = nextTransaction ?? null;
   formKey.value += 1;
   dialogRef.value?.showModal();
 }
@@ -39,14 +43,15 @@ defineExpose({
     class="w-full max-w-md"
   >
     <template #header>
-      New transaction
+      {{ isEditing ? 'Edit transaction' : 'New transaction' }}
     </template>
 
     <TransactionForm
       :key="formKey"
       ref="form"
+      :transaction="transaction"
       hide-submit
-      :form-id="FORM_ID"
+      :form-id="formId"
       @success="onSuccess"
     />
 
@@ -61,7 +66,7 @@ defineExpose({
       <Button
         type="submit"
         size="sm"
-        :form="FORM_ID"
+        :form="formId"
         :disabled="isSubmitting"
       >
         {{ isSubmitting ? 'Saving…' : 'Save transaction' }}
