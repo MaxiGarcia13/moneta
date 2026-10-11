@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import type { Transaction } from '@/domain/transactions';
+import { useTemplateRef } from 'vue';
 import TransactionDeleteButton from '@/components/transactions/transaction-delete-button.vue';
+import TransactionFormDialog from '@/components/transactions/transaction-form-dialog.vue';
 import TransactionTableHeader from '@/components/transactions/transaction-table-header.vue';
 import TransactionTableRow from '@/components/transactions/transaction-table-row.vue';
 import { useTransactionsStore } from '@/stores/transactions';
@@ -10,6 +12,14 @@ const props = defineProps<{
 }>();
 
 const transactionsStore = useTransactionsStore();
+
+const formDialogRef = useTemplateRef<{
+  showModal: (transaction?: Transaction | null) => void;
+}>('formDialog');
+
+function openEdit(transaction: Transaction) {
+  formDialogRef.value?.showModal(transaction);
+}
 
 function onDeleteSuccess() {
   if (props.transactions.length === 1 && transactionsStore.offset > 0) {
@@ -35,14 +45,19 @@ function onDeleteSuccess() {
         <TransactionTableRow
           v-for="transaction in transactions"
           :key="transaction.id"
+          class="cursor-pointer hover:bg-accent-soft"
           :issued-at="transaction.issued_at"
           :title="transaction.title"
           :type="transaction.type"
           :category="transaction.category"
           :amount="transaction.amount"
+          @click="openEdit(transaction)"
         >
           <template #trailing>
-            <td class="px-2 py-2">
+            <td
+              class="px-2 py-2"
+              @click.stop
+            >
               <TransactionDeleteButton
                 :id="transaction.id"
                 :title="transaction.title"
@@ -54,4 +69,6 @@ function onDeleteSuccess() {
       </tbody>
     </table>
   </div>
+
+  <TransactionFormDialog ref="formDialog" />
 </template>
