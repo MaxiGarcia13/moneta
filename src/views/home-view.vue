@@ -2,31 +2,47 @@
 import { computed } from 'vue';
 import CategorySpendChart from '@/components/home/category-spend-chart.vue';
 import HomeChartsFilters from '@/components/home/home-charts-filters.vue';
+import HomeChartsSkeleton from '@/components/home/home-charts-skeleton.vue';
 import HomeKpiRow from '@/components/home/home-kpi-row.vue';
 import IncomeSpendChart from '@/components/home/income-spend-chart.vue';
 import AppHeader from '@/components/layout/app-header.vue';
-import Skeleton from '@/components/ui/skeleton.vue';
 import { useHomeChartsFilters } from '@/composables/use-home-charts-filters';
 import { useHomeChartsQuery } from '@/composables/use-home-charts-query';
+import { useHomeYearCashflowQuery } from '@/composables/use-home-year-cashflow-query';
 
 const { filters } = useHomeChartsFilters();
 const {
-  isPending,
-  isError,
-  error,
+  isPending: isChartsPending,
+  isError: isChartsError,
+  error: chartsError,
   kpis,
-  monthlyCashflow,
   categorySpend,
 } = useHomeChartsQuery(filters);
+const {
+  isPending: isYearCashflowPending,
+  isError: isYearCashflowError,
+  error: yearCashflowError,
+  monthlyCashflow,
+} = useHomeYearCashflowQuery();
+
+const isPending = computed(
+  () => isChartsPending.value || isYearCashflowPending.value,
+);
 
 const errorMessage = computed(() => {
-  if (!isError.value) {
-    return null;
+  if (isChartsError.value) {
+    return chartsError.value instanceof Error
+      ? chartsError.value.message
+      : 'Failed to load charts';
   }
 
-  return error.value instanceof Error
-    ? error.value.message
-    : 'Failed to load charts';
+  if (isYearCashflowError.value) {
+    return yearCashflowError.value instanceof Error
+      ? yearCashflowError.value.message
+      : 'Failed to load charts';
+  }
+
+  return null;
 });
 </script>
 
@@ -37,20 +53,7 @@ const errorMessage = computed(() => {
     <div class="flex min-h-0 flex-1 flex-col gap-6 animate-[fade-up_0.5s_ease-out]">
       <HomeChartsFilters v-model="filters" />
 
-      <div
-        v-if="isPending"
-        class="flex flex-col gap-6"
-        aria-busy="true"
-        aria-label="Loading charts"
-      >
-        <div class="grid gap-3 sm:grid-cols-3">
-          <Skeleton class="h-20" />
-          <Skeleton class="h-20" />
-          <Skeleton class="h-20" />
-        </div>
-        <Skeleton class="h-80" />
-        <Skeleton class="h-80" />
-      </div>
+      <HomeChartsSkeleton v-if="isPending" />
 
       <p
         v-else-if="errorMessage"
@@ -66,9 +69,8 @@ const errorMessage = computed(() => {
           :expense="kpis.expense"
           :net="kpis.net"
         />
-
-        <IncomeSpendChart :cashflow="monthlyCashflow" />
         <CategorySpendChart :spend="categorySpend" />
+        <IncomeSpendChart :cashflow="monthlyCashflow" />
       </template>
     </div>
   </main>

@@ -64,7 +64,7 @@ const hasData = computed(() =>
       Income vs spend
     </h2>
     <p class="mt-1 text-sm text-muted">
-      Spent against income by month
+      Last 12 months, spent against income
     </p>
 
     <p

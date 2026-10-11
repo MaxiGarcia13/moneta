@@ -6,7 +6,6 @@ import { computed, toValue } from 'vue';
 import { TRANSACTIONS_QUERY_KEY } from '@/composables/use-transactions-query';
 import { listTransactionsInIssuedRange } from '@/services/transactions';
 import { aggregateCategorySpend } from '@/utils/aggregate-category-spend';
-import { aggregateMonthlyCashflow } from '@/utils/aggregate-monthly-cashflow';
 import {
   endOfLocalDayIso,
   startOfLocalDayIso,
@@ -85,14 +84,6 @@ export function useHomeChartsQuery(
     };
   });
 
-  const monthlyCashflow = computed(() =>
-    aggregateMonthlyCashflow(
-      filteredTransactions.value,
-      dateRange.value.issuedFrom,
-      dateRange.value.issuedTo,
-    ),
-  );
-
   const categorySpend = computed(() =>
     aggregateCategorySpend(filteredTransactions.value),
   );
@@ -100,7 +91,6 @@ export function useHomeChartsQuery(
   return {
     ...query,
     kpis,
-    monthlyCashflow,
     categorySpend,
   };
 }
