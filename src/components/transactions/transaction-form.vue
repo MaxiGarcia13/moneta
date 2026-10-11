@@ -95,8 +95,7 @@ async function onSubmit() {
 
     if (props.transaction) {
       await updateTransaction(props.transaction.id, input);
-    }
-    else {
+    } else {
       await createTransaction(input);
     }
 
