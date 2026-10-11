@@ -1,8 +1,7 @@
 <script setup lang="ts">
 import type { HomeChartsFilters } from '@/composables/use-home-charts-filters';
+import CategorySelect from '@/components/transactions/category-select.vue';
 import Input from '@/components/ui/input.vue';
-import Select from '@/components/ui/select.vue';
-import { TRANSACTION_CATEGORY_FILTER_OPTIONS } from '@/domain/transactions';
 
 const filters = defineModel<HomeChartsFilters>({ required: true });
 </script>
@@ -23,12 +22,11 @@ const filters = defineModel<HomeChartsFilters>({ required: true });
       type="date"
     />
 
-    <Select
+    <CategorySelect
       id="home-filter-category"
       v-model="filters.category"
-      label="Category"
-      :options="TRANSACTION_CATEGORY_FILTER_OPTIONS"
       empty-label="All"
+      include-uncategorized
     />
   </div>
 </template>

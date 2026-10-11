@@ -6,15 +6,12 @@ import type {
 } from '@/domain/transactions';
 import { useQueryClient } from '@tanstack/vue-query';
 import { reactive, ref } from 'vue';
+import CategorySelect from '@/components/transactions/category-select.vue';
+import TransactionTypeSelect from '@/components/transactions/transaction-type-select.vue';
 import Button from '@/components/ui/button.vue';
 import Input from '@/components/ui/input.vue';
-import Select from '@/components/ui/select.vue';
 import Textarea from '@/components/ui/textarea.vue';
 import { TRANSACTIONS_QUERY_KEY } from '@/composables/use-transactions-query';
-import {
-  TRANSACTION_CATEGORY_OPTIONS,
-  TRANSACTION_TYPE_OPTIONS,
-} from '@/domain/transactions';
 import { createTransaction } from '@/services/transactions';
 import { dateTimeLocalToIso } from '@/utils/date-time-local-to-iso';
 import { toDateTimeLocalValue } from '@/utils/to-date-time-local-value';
@@ -126,19 +123,15 @@ defineExpose({
       :error="fieldErrors.amount"
     />
 
-    <Select
+    <TransactionTypeSelect
       id="transaction-type"
       v-model="form.type"
-      label="Type"
-      :options="TRANSACTION_TYPE_OPTIONS"
       :error="fieldErrors.type"
     />
 
-    <Select
+    <CategorySelect
       id="transaction-category"
       v-model="form.category"
-      label="Category"
-      :options="TRANSACTION_CATEGORY_OPTIONS"
       empty-label="None"
     />
 

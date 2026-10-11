@@ -1,10 +1,7 @@
 <script setup lang="ts">
+import CategorySelect from '@/components/transactions/category-select.vue';
+import TransactionTypeSelect from '@/components/transactions/transaction-type-select.vue';
 import Input from '@/components/ui/input.vue';
-import Select from '@/components/ui/select.vue';
-import {
-  TRANSACTION_CATEGORY_FILTER_OPTIONS,
-  TRANSACTION_TYPE_OPTIONS,
-} from '@/domain/transactions';
 import { useTransactionsStore } from '@/stores/transactions';
 
 const transactionsStore = useTransactionsStore();
@@ -12,20 +9,17 @@ const transactionsStore = useTransactionsStore();
 
 <template>
   <div class="grid gap-4 sm:grid-cols-2">
-    <Select
+    <TransactionTypeSelect
       id="filter-type"
       v-model="transactionsStore.draftFilters.type"
-      label="Type"
-      :options="TRANSACTION_TYPE_OPTIONS"
       empty-label="All"
     />
 
-    <Select
+    <CategorySelect
       id="filter-category"
       v-model="transactionsStore.draftFilters.category"
-      label="Category"
-      :options="TRANSACTION_CATEGORY_FILTER_OPTIONS"
       empty-label="All"
+      include-uncategorized
     />
 
     <Input
