@@ -8,6 +8,10 @@ import TransactionImportSummary from '@/components/transactions/transaction-impo
 import Button from '@/components/ui/button.vue';
 import { TRANSACTIONS_QUERY_KEY } from '@/composables/use-transactions-query';
 import {
+  markDuplicateMovements,
+  parseAccountMovements,
+} from '@/domain/transactions';
+import {
   createTransactions,
   listTransactionsInIssuedRange,
 } from '@/services/transactions';
@@ -15,9 +19,7 @@ import {
   endOfLocalDayIso,
   startOfLocalDayIso,
 } from '@/utils/local-day-bounds';
-import { parseAccountMovements } from '@/utils/parse-account-movements';
 import { readFileAsLatin1 } from '@/utils/read-file-as-latin1';
-import { markDuplicateMovements } from '@/utils/transaction-fingerprint';
 
 const emit = defineEmits<{
   cancel: [];

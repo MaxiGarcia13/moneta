@@ -3,8 +3,8 @@ import type { IncomeSpendFilters } from '@/composables/use-income-spend-filters'
 import { useQuery } from '@tanstack/vue-query';
 import { computed, toValue } from 'vue';
 import { TRANSACTIONS_QUERY_KEY } from '@/composables/use-transactions-query';
+import { aggregateMonthlyCashflow } from '@/domain/transactions';
 import { listTransactionsInIssuedRange } from '@/services/transactions';
-import { aggregateMonthlyCashflow } from '@/utils/aggregate-monthly-cashflow';
 import {
   endOfLocalDayIso,
   startOfLocalDayIso,

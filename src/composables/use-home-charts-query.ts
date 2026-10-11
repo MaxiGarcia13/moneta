@@ -5,11 +5,10 @@ import { useQuery } from '@tanstack/vue-query';
 import { computed, toValue } from 'vue';
 import { TRANSACTIONS_QUERY_KEY } from '@/composables/use-transactions-query';
 import {
-
+  aggregateCategorySpend,
   UNCATEGORIZED_CATEGORY_FILTER,
 } from '@/domain/transactions';
 import { listTransactionsInIssuedRange } from '@/services/transactions';
-import { aggregateCategorySpend } from '@/utils/aggregate-category-spend';
 import {
   endOfLocalDayIso,
   startOfLocalDayIso,

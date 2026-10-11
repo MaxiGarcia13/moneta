@@ -11,13 +11,13 @@ import Input from '@/components/ui/input.vue';
 import Select from '@/components/ui/select.vue';
 import Textarea from '@/components/ui/textarea.vue';
 import { TRANSACTIONS_QUERY_KEY } from '@/composables/use-transactions-query';
-import { createTransaction } from '@/services/transactions';
-import { dateTimeLocalToIso } from '@/utils/date-time-local-to-iso';
-import { toDateTimeLocalValue } from '@/utils/to-date-time-local-value';
 import {
   TRANSACTION_CATEGORY_OPTIONS,
   TRANSACTION_TYPE_OPTIONS,
-} from '@/utils/transaction-select-options';
+} from '@/domain/transactions';
+import { createTransaction } from '@/services/transactions';
+import { dateTimeLocalToIso } from '@/utils/date-time-local-to-iso';
+import { toDateTimeLocalValue } from '@/utils/to-date-time-local-value';
 
 withDefaults(
   defineProps<{

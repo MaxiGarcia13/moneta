@@ -1,4 +1,4 @@
-import type { TransactionCategory } from '@/domain/transactions';
+import type { TransactionCategory } from './transactions';
 
 const CATEGORY_RULES: Array<{
   category: TransactionCategory;

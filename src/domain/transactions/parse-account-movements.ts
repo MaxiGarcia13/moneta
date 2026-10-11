@@ -1,9 +1,9 @@
-import type { CreateTransactionInput } from '@/domain/transactions';
-import { inferTransactionCategory } from '@/utils/infer-transaction-category';
-import { inferTransactionType } from '@/utils/infer-transaction-type';
+import type { CreateTransactionInput } from './transaction-form';
 import { normalizeWhitespace } from '@/utils/normalize-whitespace';
 import { parseSpanishAmount } from '@/utils/parse-spanish-amount';
 import { parseSpanishDateToIso } from '@/utils/parse-spanish-date';
+import { inferTransactionCategory } from './infer-transaction-category';
+import { inferTransactionType } from './infer-transaction-type';
 
 const HEADER_FECHA_OPERACION = 'fecha operacion';
 const HEADER_CONCEPTO = 'concepto';

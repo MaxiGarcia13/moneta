@@ -1,4 +1,4 @@
-import type { TransactionType } from '@/domain/transactions';
+import type { TransactionType } from './transactions';
 
 const INVESTMENT_PATTERNS = [
   /invertimos\s*por\s*ti/i,

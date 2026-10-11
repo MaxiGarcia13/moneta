@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import Input from '@/components/ui/input.vue';
 import Select from '@/components/ui/select.vue';
-import { useTransactionsStore } from '@/stores/transactions';
 import {
   TRANSACTION_CATEGORY_FILTER_OPTIONS,
   TRANSACTION_TYPE_OPTIONS,
-} from '@/utils/transaction-select-options';
+} from '@/domain/transactions';
+import { useTransactionsStore } from '@/stores/transactions';
 
 const transactionsStore = useTransactionsStore();
 </script>

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { ApexOptions } from 'apexcharts';
-import type { CategorySpend } from '@/utils/aggregate-category-spend';
+import type { CategorySpend } from '@/domain/transactions';
 import { computed } from 'vue';
 import VueApexCharts from 'vue3-apexcharts';
 import {

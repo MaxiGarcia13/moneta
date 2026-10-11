@@ -1,4 +1,4 @@
-import type { TransactionCategory, TransactionType } from '@/domain/transactions';
+import type { TransactionCategory, TransactionType } from './transactions';
 import { formatEnumLabel } from '@/utils/format-enum-label';
 
 const UNCATEGORIZED_LABEL = 'Uncategorized';

@@ -1,4 +1,4 @@
-import type { TransactionType } from '@/domain/transactions';
+import type { TransactionType } from './transactions';
 import {
   formatMonthLabel,
   listMonthKeysInRange,

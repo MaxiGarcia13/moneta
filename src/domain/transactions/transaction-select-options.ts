@@ -1,9 +1,9 @@
+import { formatEnumLabel } from '@/utils/format-enum-label';
 import {
   TRANSACTION_CATEGORIES,
   TRANSACTION_TYPES,
   UNCATEGORIZED_CATEGORY_FILTER,
-} from '@/domain/transactions';
-import { formatEnumLabel } from '@/utils/format-enum-label';
+} from './constants';
 
 export const TRANSACTION_TYPE_OPTIONS = TRANSACTION_TYPES.map((type) => ({
   value: type,
