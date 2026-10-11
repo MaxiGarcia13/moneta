@@ -46,6 +46,11 @@
   h3 {
     @apply font-heading;
   }
+
+  input[type='date'] {
+    min-width: 0;
+    max-width: 100%;
+  }
 }
 
 @keyframes fade-up {
