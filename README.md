@@ -39,10 +39,10 @@ VITE_SUPABASE_ANON_KEY=your_supabase_anon_key
 VITE_SUPABASE_PROJECT_ID=YOUR_PROJECT_REF
 ```
 
-| Variable | Description |
-| --- | --- |
-| `VITE_SUPABASE_URL` | Project URL from the Supabase dashboard (**Project Settings → API**) |
-| `VITE_SUPABASE_ANON_KEY` | Public anon key from the same API settings page |
+| Variable                   | Description                                                                         |
+| -------------------------- | ----------------------------------------------------------------------------------- |
+| `VITE_SUPABASE_URL`        | Project URL from the Supabase dashboard (**Project Settings → API**)                |
+| `VITE_SUPABASE_ANON_KEY`   | Public anon key from the same API settings page                                     |
 | `VITE_SUPABASE_PROJECT_ID` | Project reference id (used by `pnpm supabase:types` to regenerate TypeScript types) |
 
 Also in the Supabase dashboard:
