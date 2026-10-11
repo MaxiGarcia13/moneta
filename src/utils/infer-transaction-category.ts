@@ -39,6 +39,8 @@ const CATEGORY_RULES: Array<{
       /feu\s*vert/i,
       /parkia/i,
       /moeve/i,
+      /parking/i,
+      /aparcamientos/i,
     ],
   },
   {
@@ -48,6 +50,7 @@ const CATEGORY_RULES: Array<{
       /\balsa\b/i,
       /vueling/i,
       /iberia/i,
+      /intermodal/i,
     ],
   },
   {
@@ -55,6 +58,7 @@ const CATEGORY_RULES: Array<{
     patterns: [
       /glovo/i,
       /camping/i,
+      /compras\s*realizadas\s*en\s*moneda\s*no\s*euro/i,
     ],
   },
   {
@@ -64,6 +68,8 @@ const CATEGORY_RULES: Array<{
       /padel\s*club/i,
       /\bg6\b/i,
       /instituto\s*municipal\s*de\s*deportes/i,
+      /federacion\s*cantabra\s*de\s*padel/i,
+      /royma/i,
     ],
   },
   {
@@ -71,6 +77,8 @@ const CATEGORY_RULES: Array<{
     patterns: [
       /decathlon/i,
       /adidas/i,
+      /media\s*markt/i,
+      /liquidacion\s*de\s*la\s*tarjeta\s*de\s*credito/i,
     ],
   },
   {
@@ -83,6 +91,7 @@ const CATEGORY_RULES: Array<{
       /cpc\s*cant\s*sl/i,
       /passarola/i,
       /vacanze\s*romane/i,
+      /\bcafe\b/i,
     ],
   },
 ];
