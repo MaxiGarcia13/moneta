@@ -75,23 +75,23 @@ const navItems = computed(() =>
   max-width: calc(100vw - 2rem);
   translate: -50% 0;
   align-items: stretch;
-  gap: 0.5rem;
+  gap: 0.25rem;
   border-radius: 9999px;
   border: 1px solid color-mix(in oklab, var(--color-foreground) 10%, transparent);
   background: color-mix(in oklab, var(--color-surface) 60%, transparent);
-  padding: 0.5rem;
+  padding: 0.375rem;
   box-shadow: var(--shadow-md);
   backdrop-filter: blur(1.5rem);
 }
 
 .app-nav__link {
   display: flex;
-  min-width: 4rem;
+  min-width: 4.5rem;
   flex-direction: column;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.125rem;
   border-radius: 9999px;
-  padding: 0.5rem 1rem;
+  padding: 0.375rem 1rem;
   color: var(--color-muted);
   transition: color 150ms ease;
 }
@@ -108,7 +108,7 @@ const navItems = computed(() =>
 
 @media (width >= 48rem) {
   .app-nav {
-    top: 1rem;
+    top: 0.75rem;
     bottom: auto;
   }
 }
