@@ -1,4 +1,4 @@
-export type PaginationPageItem = number | 'ellipsis';
+type PaginationPageItem = number | 'ellipsis';
 
 const DEFAULT_LEFT_COUNT = 2;
 const DEFAULT_RIGHT_COUNT = 3;

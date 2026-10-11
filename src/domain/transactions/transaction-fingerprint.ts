@@ -1,6 +1,6 @@
 import { normalizeWhitespace } from '@/utils/normalize-whitespace';
 
-export interface TransactionFingerprintInput {
+interface TransactionFingerprintInput {
   issued_at: string;
   title: string;
   amount: number;
@@ -25,7 +25,7 @@ function normalizeAmount(amount: number) {
   return Number(amount).toFixed(2);
 }
 
-export function transactionFingerprint(input: TransactionFingerprintInput) {
+function transactionFingerprint(input: TransactionFingerprintInput) {
   return [
     issuedDateKey(input.issued_at),
     normalizeWhitespace(input.title),

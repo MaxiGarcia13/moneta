@@ -3,7 +3,7 @@ import { formatEnumLabel } from '@/utils/format-enum-label';
 
 const UNCATEGORIZED_LABEL = 'Uncategorized';
 
-export interface CategorySpendTransaction {
+interface CategorySpendTransaction {
   amount: number;
   type: TransactionType;
   category: TransactionCategory | null;

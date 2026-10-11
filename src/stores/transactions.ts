@@ -12,7 +12,7 @@ import {
   startOfLocalDayIso,
 } from '@/utils/local-day-bounds';
 
-export const TRANSACTION_PAGE_SIZE = 20;
+const TRANSACTION_PAGE_SIZE = 20;
 const FILTERS_DEBOUNCE_MS = 500;
 
 const DIALOG_FILTER_KEYS = [

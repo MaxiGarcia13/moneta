@@ -5,13 +5,13 @@ import {
   toMonthKey,
 } from '@/utils/month-bounds';
 
-export interface CashflowTransaction {
+interface CashflowTransaction {
   issued_at: string;
   amount: number;
   type: TransactionType;
 }
 
-export interface MonthlyCashflow {
+interface MonthlyCashflow {
   months: string[];
   income: number[];
   expense: number[];

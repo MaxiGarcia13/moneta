@@ -3,7 +3,7 @@ import {
   startOfLocalDayIso,
 } from '@/utils/local-day-bounds';
 
-export interface IssuedDateRangeFilters {
+interface IssuedDateRangeFilters {
   issuedFrom: string;
   issuedTo: string;
 }

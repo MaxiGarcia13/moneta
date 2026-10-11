@@ -1,6 +1,6 @@
 import { formatEnumLabel } from '@/utils/format-enum-label';
 
-export function toSelectOption(value: string) {
+function toSelectOption(value: string) {
   return {
     value,
     label: formatEnumLabel(value),
