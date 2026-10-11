@@ -7,7 +7,7 @@ const filters = defineModel<HomeChartsFilters>({ required: true });
 </script>
 
 <template>
-  <div class="grid gap-4 grid-cols-3">
+  <div class="grid grid-cols-3 gap-2 sm:gap-4 [&>*]:min-w-0">
     <DateRangeFields
       id-prefix="home-filter-issued"
       v-model:issued-from="filters.issuedFrom"

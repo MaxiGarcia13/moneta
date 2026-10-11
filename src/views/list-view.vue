@@ -11,9 +11,11 @@ import TransactionList from '@/components/transactions/transaction-list.vue';
 
   <main class="py-8">
     <div class="flex min-h-0 flex-1 flex-col gap-6 animate-[fade-up_0.5s_ease-out]">
-      <div class="flex shrink-0 flex-wrap items-end justify-between gap-4">
-        <TransactionFilters />
-        <div class="flex flex-wrap items-center gap-2">
+      <div class="flex shrink-0 items-end justify-between gap-2 sm:gap-4">
+        <div class="min-w-0 flex-1">
+          <TransactionFilters />
+        </div>
+        <div class="flex shrink-0 items-center gap-2">
           <TransactionImportButton />
           <TransactionCreateButton />
         </div>

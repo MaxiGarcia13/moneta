@@ -20,14 +20,14 @@ function openFiltersDialog() {
 </script>
 
 <template>
-  <div class="flex items-end">
+  <div class="flex w-full min-w-0 items-end max-w-96">
     <Input
       id="filter-title"
       v-model="draftFilters.title"
       label="Title"
       type="search"
       autocomplete="off"
-      class="min-w-0 flex-1 max-w-96"
+      class="min-w-0 flex-1"
       input-class="rounded-r-none border-r-0"
     />
 
