@@ -1,8 +1,5 @@
 import type { ListTransactionsParams, ListTransactionsResult } from '@/domain/transactions';
-import {
-
-  UNCATEGORIZED_CATEGORY_FILTER,
-} from '@/domain/transactions';
+import { UNCATEGORIZED_CATEGORY_FILTER } from '@/domain/transactions';
 import { requireUserId } from '@/services/transactions/require-user-id';
 import { supabase } from '@/supabase/client';
 
