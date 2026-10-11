@@ -22,6 +22,11 @@ function applyFilters() {
   dialogRef.value?.close();
 }
 
+function clearFilters() {
+  transactionsStore.clearDialogFilters();
+  dialogRef.value?.close();
+}
+
 function onDialogClose() {
   transactionsStore.syncDraftDialogFilters();
 }
@@ -44,6 +49,14 @@ defineExpose({
     <TransactionFilterFields />
 
     <template #footer>
+      <Button
+        variant="ghost"
+        size="sm"
+        class="!text-danger hover:!border-danger/40 hover:!bg-danger/10"
+        @click="clearFilters"
+      >
+        Clear filter
+      </Button>
       <Button
         variant="ghost"
         size="sm"

@@ -68,6 +68,14 @@ export const useTransactionsStore = defineStore('transactions', () => {
     offset.value = 0;
   }
 
+  function clearDialogFilters() {
+    for (const key of DIALOG_FILTER_KEYS) {
+      draftFilters[key] = '';
+      filters[key] = '';
+    }
+    offset.value = 0;
+  }
+
   const activeDialogFilterCount = computed(() => countSetDialogFilters(filters));
 
   const listParams = computed<ListTransactionsParams>(() => ({
@@ -97,5 +105,6 @@ export const useTransactionsStore = defineStore('transactions', () => {
     activeDialogFilterCount,
     syncDraftDialogFilters,
     applyDraftFilters,
+    clearDialogFilters,
   };
 });

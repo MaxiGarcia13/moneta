@@ -4,6 +4,7 @@ import { reactive, useTemplateRef } from 'vue';
 import Button from '@/components/ui/button.vue';
 import Dialog from '@/components/ui/dialog.vue';
 import Input from '@/components/ui/input.vue';
+import { getDefaultHomeDateRange } from '@/utils/month-bounds';
 
 const filters = defineModel<IncomeSpendFilters>({ required: true });
 
@@ -32,6 +33,11 @@ function applyFilters() {
     issuedFrom: draft.issuedFrom,
     issuedTo: draft.issuedTo,
   };
+  dialogRef.value?.close();
+}
+
+function clearFilters() {
+  filters.value = getDefaultHomeDateRange();
   dialogRef.value?.close();
 }
 
@@ -66,6 +72,14 @@ defineExpose({
     </div>
 
     <template #footer>
+      <Button
+        variant="ghost"
+        size="sm"
+        class="!text-danger hover:!border-danger/40 hover:!bg-danger/10"
+        @click="clearFilters"
+      >
+        Clear filter
+      </Button>
       <Button
         variant="ghost"
         size="sm"
