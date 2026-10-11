@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import type { IncomeSpendFilters } from '@/composables/use-income-spend-filters';
 import { reactive, useTemplateRef } from 'vue';
-import Button from '@/components/ui/button.vue';
 import Dialog from '@/components/ui/dialog.vue';
+import FiltersDialogActions from '@/components/ui/filters-dialog-actions.vue';
 import Input from '@/components/ui/input.vue';
 import { getDefaultHomeDateRange } from '@/utils/month-bounds';
 
@@ -72,27 +72,11 @@ defineExpose({
     </div>
 
     <template #footer>
-      <Button
-        variant="ghost"
-        size="sm"
-        class="!text-danger hover:!border-danger/40 hover:!bg-danger/10"
-        @click="clearFilters"
-      >
-        Clear filter
-      </Button>
-      <Button
-        variant="ghost"
-        size="sm"
-        @click="dialogRef?.close()"
-      >
-        Cancel
-      </Button>
-      <Button
-        size="sm"
-        @click="applyFilters"
-      >
-        Apply
-      </Button>
+      <FiltersDialogActions
+        @clear="clearFilters"
+        @cancel="dialogRef?.close()"
+        @apply="applyFilters"
+      />
     </template>
   </Dialog>
 </template>

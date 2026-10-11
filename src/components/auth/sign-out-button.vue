@@ -15,9 +15,8 @@ async function onSignOut() {
 
 <template>
   <Button
-    variant="ghost"
+    variant="danger"
     size="sm"
-    class="!text-danger hover:!border-danger/40 hover:!bg-danger/10"
     @click="onSignOut"
   >
     <LogoutIcon class="size-4" />
