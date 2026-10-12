@@ -22,11 +22,13 @@ const sizeClass = sizeClasses[props.size] ?? sizeClasses.md;
 </script>
 
 <template>
-  <h1
-    class="font-heading font-semibold tracking-tight text-foreground flex gap-2 items-center"
-    :class="[sizeClass.text]"
-  >
-    <BrandIcon :class="sizeClass.icon" />
-    Moneta
-  </h1>
+  <RouterLink to="/">
+    <h1
+      class="font-heading font-semibold tracking-tight text-foreground flex gap-2 items-center"
+      :class="[sizeClass.text]"
+    >
+      <BrandIcon :class="sizeClass.icon" />
+      Moneta
+    </h1>
+  </RouterLink>
 </template>
