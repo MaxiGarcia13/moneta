@@ -1,7 +1,7 @@
-import type { createStorage } from '@maxigarcia/js-utils';
+import type { createAppStorage } from '@/utils/create-app-storage';
 
 export function readStoredJson<T>(
-  storage: ReturnType<typeof createStorage<T>>,
+  storage: ReturnType<typeof createAppStorage<T>>,
   createDefault: () => T,
   isValid: (value: T) => boolean = () => true,
 ): T {

@@ -4,9 +4,10 @@ import type {
   TransactionFilters,
   TransactionType,
 } from '@/domain/transactions';
-import { createStorage, debounce } from '@maxigarcia/js-utils';
+import { debounce } from '@maxigarcia/js-utils';
 import { acceptHMRUpdate, defineStore } from 'pinia';
 import { computed, reactive, ref, watch } from 'vue';
+import { createAppStorage } from '@/utils/create-app-storage';
 import {
   endOfLocalDayIso,
   startOfLocalDayIso,
@@ -16,7 +17,7 @@ import { readStoredJson } from '@/utils/read-stored-json';
 const TRANSACTION_PAGE_SIZE = 20;
 const FILTERS_DEBOUNCE_MS = 500;
 
-const filtersStorage = createStorage<TransactionFilters>('transaction-filters');
+const filtersStorage = createAppStorage<TransactionFilters>('transaction-filters');
 
 const DIALOG_FILTER_KEYS = [
   'category',

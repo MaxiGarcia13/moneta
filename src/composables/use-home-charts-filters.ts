@@ -1,5 +1,5 @@
-import { createStorage } from '@maxigarcia/js-utils';
 import { ref, watch } from 'vue';
+import { createAppStorage } from '@/utils/create-app-storage';
 import { getDefaultHomeDateRange } from '@/utils/month-bounds';
 import { readStoredJson } from '@/utils/read-stored-json';
 
@@ -8,7 +8,7 @@ export interface HomeChartsFilters {
   issuedTo: string;
 }
 
-const filtersStorage = createStorage<HomeChartsFilters>('home-charts-filters');
+const filtersStorage = createAppStorage<HomeChartsFilters>('home-charts-filters');
 
 function createDefaultFilters(): HomeChartsFilters {
   const { issuedFrom, issuedTo } = getDefaultHomeDateRange();
