@@ -6,7 +6,7 @@ export const DEFAULT_THEME: Theme = 'dark';
 
 const THEME_COLORS: Record<Theme, string> = {
   light: '#ebe7df',
-  dark: '#0c0e12',
+  dark: '#14161b',
 };
 
 const themeStorage = createAppStorage<Theme>('theme');

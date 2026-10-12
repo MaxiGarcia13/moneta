@@ -2,27 +2,43 @@
 @import '@maxigarcia/view-transitions/circular-reveal.css';
 
 @theme {
-  --color-background: #0c0e12;
-  --color-foreground: #e8eaef;
-  --color-muted: #8b919c;
-  --color-border: #1e232b;
-  --color-surface: #141820;
-  --color-surface-raised: #1a1f28;
-  --color-accent: #3dd6c6;
-  --color-accent-soft: rgba(61, 214, 198, 0.12);
-  --color-accent-border: rgba(61, 214, 198, 0.4);
-  --color-danger: #f07178;
-  --color-investment: #d4a574;
-  --color-code: #1a1f28;
+  --color-background: #ebe7df;
+  --color-foreground: #1f1e1b;
+  --color-muted: #6f6a62;
+  --color-border: #d0c9bc;
+  --color-surface: #e2ddd3;
+  --color-surface-raised: #f3f0e8;
+  --color-accent: #0f9f90;
+  --color-accent-soft: rgba(15, 159, 144, 0.12);
+  --color-accent-border: rgba(15, 159, 144, 0.35);
+  --color-danger: #c45b5f;
+  --color-investment: #a8845a;
+  --color-code: #ddd8ce;
 
   --font-sans: 'DM Sans', ui-sans-serif, system-ui, sans-serif;
   --font-heading: 'Fraunces', ui-serif, Georgia, serif;
   --font-mono: ui-monospace, Consolas, monospace;
 
-  --shadow-md: rgba(0, 0, 0, 0.4) 0 10px 15px -3px, rgba(0, 0, 0, 0.25) 0 4px 6px -2px;
+  --shadow-md: rgba(45, 40, 30, 0.08) 0 10px 15px -3px, rgba(45, 40, 30, 0.05) 0 4px 6px -2px;
 }
 
 @layer base {
+  .dark {
+    --color-background: #14161b;
+    --color-foreground: #eceef2;
+    --color-muted: #9aa0ab;
+    --color-border: #353a45;
+    --color-surface: #1c1f26;
+    --color-surface-raised: #262a33;
+    --color-accent: #2ec4b6;
+    --color-accent-soft: rgba(46, 196, 182, 0.14);
+    --color-accent-border: rgba(46, 196, 182, 0.45);
+    --color-danger: #e07a7f;
+    --color-investment: #c9a06e;
+    --color-code: #262a33;
+    --shadow-md: rgba(0, 0, 0, 0.35) 0 10px 15px -3px, rgba(0, 0, 0, 0.2) 0 4px 6px -2px;
+  }
+
   html {
     @apply bg-background text-foreground antialiased;
   }

@@ -33,8 +33,8 @@ const CHART_CHROME: Record<
     tooltipTheme: 'light',
   },
   dark: {
-    foreColor: '#8b919c',
-    borderColor: '#1e232b',
+    foreColor: '#9aa0ab',
+    borderColor: '#353a45',
     tooltipTheme: 'dark',
   },
 };
