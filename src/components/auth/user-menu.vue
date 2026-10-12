@@ -7,7 +7,7 @@ import Menu from '@/components/ui/menu.vue';
 </script>
 
 <template>
-  <Menu>
+  <Menu class="my-auto flex justify-center items-center">
     <template #trigger="{ open, toggle }">
       <button
         type="button"

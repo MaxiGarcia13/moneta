@@ -1,6 +1,10 @@
 <script setup lang="ts">
 import { onMounted, onUnmounted, ref, useTemplateRef } from 'vue';
 
+const props = defineProps<{
+  class?: string;
+}>();
+
 const open = ref(false);
 const rootRef = useTemplateRef<HTMLElement>('root');
 
@@ -43,6 +47,7 @@ onUnmounted(() => {
   <div
     ref="root"
     class="relative"
+    :class="props.class"
   >
     <slot
       name="trigger"
