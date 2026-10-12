@@ -4,16 +4,19 @@ import type {
   TransactionFilters,
   TransactionType,
 } from '@/domain/transactions';
-import { debounce } from '@maxigarcia/js-utils';
+import { createStorage, debounce } from '@maxigarcia/js-utils';
 import { acceptHMRUpdate, defineStore } from 'pinia';
 import { computed, reactive, ref, watch } from 'vue';
 import {
   endOfLocalDayIso,
   startOfLocalDayIso,
 } from '@/utils/local-day-bounds';
+import { readStoredJson } from '@/utils/read-stored-json';
 
 const TRANSACTION_PAGE_SIZE = 20;
 const FILTERS_DEBOUNCE_MS = 500;
+
+const filtersStorage = createStorage<TransactionFilters>('transaction-filters');
 
 const DIALOG_FILTER_KEYS = [
   'category',
@@ -32,20 +35,39 @@ function createEmptyFilters(): TransactionFilters {
   };
 }
 
+function readStoredFilters(): TransactionFilters {
+  const stored = readStoredJson(
+    filtersStorage,
+    createEmptyFilters,
+    (value) => typeof value === 'object',
+  );
+
+  return {
+    ...createEmptyFilters(),
+    ...stored,
+  };
+}
+
 function countSetDialogFilters(source: TransactionFilters): number {
   return DIALOG_FILTER_KEYS.filter((key) => Boolean(source[key])).length;
 }
 
 export const useTransactionsStore = defineStore('transactions', () => {
-  const draftFilters = reactive<TransactionFilters>(createEmptyFilters());
-  const filters = reactive<TransactionFilters>(createEmptyFilters());
+  const initialFilters = readStoredFilters();
+  const draftFilters = reactive<TransactionFilters>({ ...initialFilters });
+  const filters = reactive<TransactionFilters>({ ...initialFilters });
 
   const offset = ref(0);
   const limit = TRANSACTION_PAGE_SIZE;
 
+  function persistFilters() {
+    filtersStorage.setJson({ ...filters });
+  }
+
   const commitTitle = debounce(() => {
     filters.title = draftFilters.title;
     offset.value = 0;
+    persistFilters();
   }, FILTERS_DEBOUNCE_MS);
 
   watch(
@@ -66,6 +88,7 @@ export const useTransactionsStore = defineStore('transactions', () => {
       filters[key] = draftFilters[key];
     }
     offset.value = 0;
+    persistFilters();
   }
 
   function clearDialogFilters() {
