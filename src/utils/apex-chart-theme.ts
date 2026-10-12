@@ -1,4 +1,5 @@
 import type { ApexOptions } from 'apexcharts';
+import type { Theme } from '@/utils/theme';
 
 export const CHART_COLOR_SPENT = '#f07178';
 export const CHART_COLOR_INVESTED = '#d4a574';
@@ -18,28 +19,55 @@ export const CHART_CATEGORY_COLORS = [
   '#565f89',
 ];
 
+const CHART_CHROME: Record<
+  Theme,
+  {
+    foreColor: string;
+    borderColor: string;
+    tooltipTheme: 'light' | 'dark';
+  }
+> = {
+  light: {
+    foreColor: '#6f6a62',
+    borderColor: '#d0c9bc',
+    tooltipTheme: 'light',
+  },
+  dark: {
+    foreColor: '#8b919c',
+    borderColor: '#1e232b',
+    tooltipTheme: 'dark',
+  },
+};
+
+export function getChartChrome(theme: Theme) {
+  return CHART_CHROME[theme];
+}
+
 export function createBaseChartOptions(
+  theme: Theme,
   overrides: ApexOptions = {},
 ): ApexOptions {
+  const chrome = getChartChrome(theme);
+
   return {
     ...overrides,
     chart: {
       background: 'transparent',
-      foreColor: '#8b919c',
+      foreColor: chrome.foreColor,
       toolbar: { show: false },
       fontFamily: 'DM Sans, ui-sans-serif, system-ui, sans-serif',
       ...overrides.chart,
     },
     grid: {
-      borderColor: '#1e232b',
+      borderColor: chrome.borderColor,
       ...overrides.grid,
     },
     tooltip: {
-      theme: 'dark',
+      theme: chrome.tooltipTheme,
       ...overrides.tooltip,
     },
     legend: {
-      labels: { colors: '#8b919c' },
+      labels: { colors: chrome.foreColor },
       ...overrides.legend,
     },
   };
