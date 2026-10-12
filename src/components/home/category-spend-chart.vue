@@ -3,6 +3,7 @@ import type { ApexOptions } from 'apexcharts';
 import type { CategorySpend } from '@/domain/transactions';
 import { computed } from 'vue';
 import VueApexCharts from 'vue3-apexcharts';
+import { useTheme } from '@/composables/use-theme';
 import {
   CHART_CATEGORY_COLORS,
   createBaseChartOptions,
@@ -13,10 +14,11 @@ const props = defineProps<{
   spend: CategorySpend;
 }>();
 
+const { theme } = useTheme();
 const series = computed(() => props.spend.values);
 
 const options = computed<ApexOptions>(() =>
-  createBaseChartOptions({
+  createBaseChartOptions(theme.value, {
     chart: {
       type: 'donut',
     },

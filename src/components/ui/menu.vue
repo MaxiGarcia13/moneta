@@ -53,7 +53,7 @@ onUnmounted(() => {
     <div
       v-if="open"
       role="menu"
-      class="absolute right-0 z-50 mt-2 min-w-36 rounded-xl border border-border bg-surface-raised p-2 shadow-md"
+      class="absolute right-0 z-50 mt-2 min-w-44 rounded-xl border border-border bg-surface-raised p-2 shadow-md"
     >
       <slot
         :close="close"

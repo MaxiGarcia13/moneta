@@ -9,17 +9,20 @@ import Button from '@/components/ui/button.vue';
 import Skeleton from '@/components/ui/skeleton.vue';
 import { useIncomeSpendCashflowQuery } from '@/composables/use-income-spend-cashflow-query';
 import { useIncomeSpendFilters } from '@/composables/use-income-spend-filters';
+import { useTheme } from '@/composables/use-theme';
 import {
   CHART_COLOR_INVESTED,
   CHART_COLOR_REMAINING,
   CHART_COLOR_SPENT,
   createBaseChartOptions,
+  getChartChrome,
 } from '@/utils/apex-chart-theme';
 import { formatAmount } from '@/utils/format-amount';
 import { formatDateOnly } from '@/utils/format-date-only';
 
 const MONTH_COLUMN_WIDTH_PX = 56;
 
+const { theme } = useTheme();
 const { filters, isDefaultRange } = useIncomeSpendFilters();
 const {
   isPending,
@@ -38,8 +41,10 @@ const series = computed(() => [
   { name: 'Remaining', data: monthlyCashflow.value.remaining },
 ]);
 
-const options = computed<ApexOptions>(() =>
-  createBaseChartOptions({
+const options = computed<ApexOptions>(() => {
+  const chrome = getChartChrome(theme.value);
+
+  return createBaseChartOptions(theme.value, {
     chart: {
       type: 'bar',
       stacked: true,
@@ -55,8 +60,8 @@ const options = computed<ApexOptions>(() =>
     dataLabels: { enabled: false },
     xaxis: {
       categories: monthlyCashflow.value.months,
-      axisBorder: { color: '#1e232b' },
-      axisTicks: { color: '#1e232b' },
+      axisBorder: { color: chrome.borderColor },
+      axisTicks: { color: chrome.borderColor },
     },
     yaxis: {
       labels: {
@@ -68,8 +73,8 @@ const options = computed<ApexOptions>(() =>
         formatter: (value) => formatAmount(value ?? 0),
       },
     },
-  }),
-);
+  });
+});
 
 const hasData = computed(() =>
   monthlyCashflow.value.income.some((value) => value > 0)

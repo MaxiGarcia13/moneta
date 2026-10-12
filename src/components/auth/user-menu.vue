@@ -2,6 +2,7 @@
 import SignOutButton from '@/components/auth/sign-out-button.vue';
 import UserAvatar from '@/components/auth/user-avatar.vue';
 import ChevronDownIcon from '@/components/icons/chevron-down.vue';
+import ThemeSwitch from '@/components/theme/theme-switch.vue';
 import Menu from '@/components/ui/menu.vue';
 </script>
 
@@ -25,11 +26,14 @@ import Menu from '@/components/ui/menu.vue';
     </template>
 
     <template #default="{ close }">
-      <SignOutButton
-        role="menuitem"
-        class="w-full"
-        @click="close"
-      />
+      <div class="flex flex-col gap-2">
+        <ThemeSwitch role="menuitem" />
+        <SignOutButton
+          role="menuitem"
+          class="w-full"
+          @click="close"
+        />
+      </div>
     </template>
   </Menu>
 </template>
