@@ -27,6 +27,7 @@
   },
   "dependencies": {
     "@maxigarcia/js-utils": "^1.22.1",
+    "@maxigarcia/view-transitions": "^0.9.0",
     "@supabase/supabase-js": "^2.117.3",
     "@tailwindcss/vite": "^4.3.3",
     "@tanstack/vue-query": "^5.104.1",
