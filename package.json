@@ -21,6 +21,8 @@
     "preview": "vite preview",
     "lint": "eslint",
     "lint:fix": "eslint --fix",
+    "test": "vitest run",
+    "test:watch": "vitest",
     "supabase:types": "pnpm dlx supabase gen types typescript --project-id \"$(sed -n 's/^VITE_SUPABASE_PROJECT_ID=//p' .env)\" > src/supabase/database.types.ts",
     "clean": "rm -rf .vite dist node_modules pnpm-lock.yaml",
     "phoenix": "pnpm clean && pnpm install && pnpm run build"
