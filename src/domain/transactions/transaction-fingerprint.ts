@@ -1,4 +1,4 @@
-import { normalizeWhitespace } from '@/utils/normalize-whitespace';
+import { normalizeMovementTitle } from '@/utils/normalize-movement-title';
 
 interface TransactionFingerprintInput {
   issued_at: string;
@@ -28,7 +28,7 @@ function normalizeAmount(amount: number) {
 function transactionFingerprint(input: TransactionFingerprintInput) {
   return [
     issuedDateKey(input.issued_at),
-    normalizeWhitespace(input.title),
+    normalizeMovementTitle(input.title),
     normalizeAmount(input.amount),
     input.type,
   ].join('|');

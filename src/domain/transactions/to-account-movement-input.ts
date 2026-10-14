@@ -1,4 +1,5 @@
 import type { TransactionFormInput } from './transaction-form';
+import { normalizeMovementTitle } from '@/utils/normalize-movement-title';
 import { inferTransactionCategory } from './infer-transaction-category';
 import { inferTransactionType } from './infer-transaction-type';
 
@@ -7,12 +8,14 @@ export function toAccountMovementInput(
   signedAmount: number,
   issuedAt: string,
 ): TransactionFormInput {
+  const title = normalizeMovementTitle(concept);
+
   return {
-    title: concept,
-    description: concept,
+    title,
+    description: title,
     amount: Math.abs(signedAmount),
-    type: inferTransactionType(concept, signedAmount),
-    category: inferTransactionCategory(concept),
+    type: inferTransactionType(title, signedAmount),
+    category: inferTransactionCategory(title),
     issued_at: issuedAt,
   };
 }
