@@ -9,7 +9,7 @@ Moneta is built around a **month-first** view of your money: what you earned, wh
 - **Sign in with GitHub** — auth is handled via Supabase OAuth
 - **Home dashboard** — KPIs for income, expenses, investments, and net balance; category spend and income vs spend charts
 - **Transactions** — create, edit, delete, and filter transactions by date, type, and category
-- **Bank import** — import account movements from Spanish bank HTML statements (`fecha operacion`, `concepto`, `importe`)
+- **Bank import** — import account movements from Open Bank HTML/XLS or PDF statements (`fecha operacion`, `concepto`, `importe`)
 - **Categories & types** — expenses/income/investments with categories like housing, groceries, transport, leisure, and more
 
 ## Stack
