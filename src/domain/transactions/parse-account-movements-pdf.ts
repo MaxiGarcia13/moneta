@@ -1,5 +1,6 @@
 import type { TransactionFormInput } from './transaction-form';
 import type { PdfTextItem } from '@/utils/extract-pdf-text-items';
+import { foldText } from '@/utils/fold-text';
 import {
   isMovementAmountToken,
   parseMovementAmount,
@@ -17,13 +18,6 @@ interface PdfTextRow {
   page: number;
   y: number;
   items: PdfTextItem[];
-}
-
-function foldText(value: string) {
-  return normalizeWhitespace(value)
-    .normalize('NFD')
-    .replace(/\p{M}/gu, '')
-    .toLowerCase();
 }
 
 function groupItemsIntoRows(items: PdfTextItem[]): PdfTextRow[] {

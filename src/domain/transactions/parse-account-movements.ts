@@ -1,4 +1,5 @@
 import type { TransactionFormInput } from './transaction-form';
+import { foldText } from '@/utils/fold-text';
 import { parseMovementAmount } from '@/utils/movement-amount';
 import { parseMovementDate } from '@/utils/movement-date';
 import { normalizeWhitespace } from '@/utils/normalize-whitespace';
@@ -7,13 +8,6 @@ import { toAccountMovementInput } from './to-account-movement-input';
 const HEADER_FECHA_OPERACION = 'fecha operacion';
 const HEADER_CONCEPTO = 'concepto';
 const HEADER_IMPORTE = 'importe';
-
-function foldText(value: string) {
-  return normalizeWhitespace(value)
-    .normalize('NFD')
-    .replace(/\p{M}/gu, '')
-    .toLowerCase();
-}
 
 function cellText(cell: Element | undefined) {
   return normalizeWhitespace(cell?.textContent ?? '');
