@@ -6,7 +6,7 @@ const emit = defineEmits<{
   select: [file: File];
 }>();
 
-const ACCEPTED_EXTENSIONS = ['.html', '.xls'];
+const ACCEPTED_EXTENSIONS = ['.html', '.xls', '.pdf'];
 
 const fileInputRef = useTemplateRef<HTMLInputElement>('fileInput');
 const isDragging = ref(false);
@@ -25,7 +25,7 @@ function takeFile(file: File | undefined) {
   }
 
   if (!hasAcceptedExtension(file)) {
-    error.value = 'Only .html or .xls files are supported';
+    error.value = 'Only .html, .xls, or .pdf files are supported';
     return;
   }
 
@@ -66,7 +66,7 @@ function openFilePicker() {
           Drop a file here or click to browse
         </p>
         <p class="text-sm text-muted">
-          Accepts .html or .xls account exports
+          Accepts .html, .xls, or .pdf account exports
         </p>
       </div>
     </button>
@@ -75,7 +75,7 @@ function openFilePicker() {
       ref="fileInput"
       type="file"
       class="sr-only"
-      accept=".html,.xls,text/html"
+      accept=".html,.xls,.pdf,text/html,application/pdf"
       @change="onFileChange"
     >
 

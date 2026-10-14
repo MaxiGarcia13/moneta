@@ -10,11 +10,13 @@ import { TRANSACTIONS_QUERY_KEY } from '@/composables/use-transactions-query';
 import {
   markDuplicateMovements,
   parseAccountMovements,
+  parseAccountMovementsPdf,
 } from '@/domain/transactions';
 import {
   createTransactions,
   listTransactionsInIssuedRange,
 } from '@/services/transactions';
+import { extractPdfTextItems } from '@/utils/extract-pdf-text-items';
 import {
   endOfLocalDayIso,
   startOfLocalDayIso,
@@ -86,6 +88,16 @@ async function detectDuplicates(parsed: TransactionFormInput[]) {
   selected.value = duplicateFlags.map((isDuplicate) => !isDuplicate);
 }
 
+async function parseImportFile(file: File) {
+  if (file.name.toLowerCase().endsWith('.pdf')) {
+    const items = await extractPdfTextItems(file);
+    return parseAccountMovementsPdf(items);
+  }
+
+  const html = await readFileAsLatin1(file);
+  return parseAccountMovements(html);
+}
+
 async function onFileSelect(file: File) {
   parseError.value = null;
   submitError.value = null;
@@ -93,8 +105,7 @@ async function onFileSelect(file: File) {
   isCheckingDuplicates.value = true;
 
   try {
-    const html = await readFileAsLatin1(file);
-    const parsed = parseAccountMovements(html);
+    const parsed = await parseImportFile(file);
     movements.value = parsed;
     await detectDuplicates(parsed);
   } catch (error) {
