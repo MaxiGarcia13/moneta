@@ -1,3 +1,4 @@
+import { foldText } from '@/utils/fold-text';
 import { normalizeMovementTitle } from '@/utils/normalize-movement-title';
 
 interface TransactionFingerprintInput {
@@ -28,7 +29,7 @@ function normalizeAmount(amount: number) {
 function transactionFingerprint(input: TransactionFingerprintInput) {
   return [
     issuedDateKey(input.issued_at),
-    normalizeMovementTitle(input.title),
+    foldText(normalizeMovementTitle(input.title)),
     normalizeAmount(input.amount),
     input.type,
   ].join('|');
