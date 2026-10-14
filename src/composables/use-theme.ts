@@ -1,13 +1,15 @@
+import type { ThemeRevealOrigin } from '@maxigarcia/view-transitions';
+import type { Theme } from '@/utils/theme';
 import {
   onCircularRevealAnimation,
-  type ThemeRevealOrigin,
+
 } from '@maxigarcia/view-transitions';
 import { computed, ref } from 'vue';
 import {
   applyTheme,
   getOppositeTheme,
   readStoredTheme,
-  type Theme,
+
   writeStoredTheme,
 } from '@/utils/theme';
 

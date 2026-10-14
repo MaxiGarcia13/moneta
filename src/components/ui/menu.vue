@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import { onMounted, onUnmounted, ref, useTemplateRef, watch } from 'vue';
 
-const MENU_OFFSET_PX = 8;
-
 const props = defineProps<{
   class?: string;
 }>();
+
+const MENU_OFFSET_PX = 8;
 
 const open = ref(false);
 const rootRef = useTemplateRef<HTMLElement>('root');

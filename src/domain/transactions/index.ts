@@ -4,6 +4,8 @@ export * from './constants';
 export * from './infer-transaction-category';
 export * from './infer-transaction-type';
 export * from './parse-account-movements';
+export * from './parse-account-movements-pdf';
+export * from './to-account-movement-input';
 export * from './transaction-filters';
 export * from './transaction-fingerprint';
 export * from './transaction-form';

@@ -7,6 +7,7 @@ export interface PdfTextItem {
   str: string;
   x: number;
   y: number;
+  page: number;
 }
 
 export async function extractPdfTextItems(file: File): Promise<PdfTextItem[]> {
@@ -29,6 +30,7 @@ export async function extractPdfTextItems(file: File): Promise<PdfTextItem[]> {
           str: item.str,
           x: item.transform[4],
           y: item.transform[5],
+          page: pageNumber,
         });
       }
     }
