@@ -1,16 +1,16 @@
 import type { TransactionFormInput } from './transaction-form';
 import type { PdfTextItem } from '@/utils/extract-pdf-text-items';
+import {
+  isMovementAmountToken,
+  parseMovementAmount,
+} from '@/utils/movement-amount';
+import {
+  isMovementDateToken,
+  parseMovementDate,
+} from '@/utils/movement-date';
 import { normalizeWhitespace } from '@/utils/normalize-whitespace';
-import { parseDotDecimalAmount } from '@/utils/parse-dot-decimal-amount';
-import { parseIsoDateOnlyToIso } from '@/utils/parse-iso-date-only';
-import { parseSpanishAmount } from '@/utils/parse-spanish-amount';
-import { parseSpanishDateToIso } from '@/utils/parse-spanish-date';
 import { toAccountMovementInput } from './to-account-movement-input';
 
-const ISO_DATE_PATTERN = /^\d{4}-\d{2}-\d{2}$/;
-const SPANISH_DATE_PATTERN = /^\d{2}\/\d{2}\/\d{4}$/;
-const DOT_AMOUNT_PATTERN = /^-?\d+(?:\.\d+)?$/;
-const SPANISH_AMOUNT_PATTERN = /^-?\d{1,3}(?:\.\d{3})*,\d+(?:\s*EUR)?$/i;
 const CONCEPT_Y_TOLERANCE = 12;
 
 interface PdfTextRow {
@@ -24,42 +24,6 @@ function foldText(value: string) {
     .normalize('NFD')
     .replace(/\p{M}/gu, '')
     .toLowerCase();
-}
-
-function isDateToken(value: string) {
-  return ISO_DATE_PATTERN.test(value) || SPANISH_DATE_PATTERN.test(value);
-}
-
-function stripAmountCurrency(value: string) {
-  return value.replace(/\s*EUR$/i, '').trim();
-}
-
-function isAmountToken(value: string) {
-  if (isDateToken(value)) {
-    return false;
-  }
-
-  const amount = stripAmountCurrency(value);
-
-  return DOT_AMOUNT_PATTERN.test(amount) || SPANISH_AMOUNT_PATTERN.test(amount);
-}
-
-function parseDateToken(value: string) {
-  if (ISO_DATE_PATTERN.test(value)) {
-    return parseIsoDateOnlyToIso(value);
-  }
-
-  return parseSpanishDateToIso(value);
-}
-
-function parseAmountToken(value: string) {
-  const amount = stripAmountCurrency(value);
-
-  if (amount.includes(',')) {
-    return parseSpanishAmount(amount);
-  }
-
-  return parseDotDecimalAmount(amount);
 }
 
 function groupItemsIntoRows(items: PdfTextItem[]): PdfTextRow[] {
@@ -117,8 +81,8 @@ function isSkippedRow(row: PdfTextRow) {
 }
 
 function isValueRow(row: PdfTextRow) {
-  const dates = row.items.filter((item) => isDateToken(item.str));
-  const amounts = row.items.filter((item) => isAmountToken(item.str));
+  const dates = row.items.filter((item) => isMovementDateToken(item.str));
+  const amounts = row.items.filter((item) => isMovementAmountToken(item.str));
 
   return dates.length >= 2 && amounts.length >= 2;
 }
@@ -145,14 +109,15 @@ function parseValueRow(
   rows: PdfTextRow[],
 ): TransactionFormInput | null {
   const dates = row.items
-    .filter((item) => isDateToken(item.str))
+    .filter((item) => isMovementDateToken(item.str))
     .toSorted((left, right) => left.x - right.x);
   const amounts = row.items
-    .filter((item) => isAmountToken(item.str))
+    .filter((item) => isMovementAmountToken(item.str))
     .toSorted((left, right) => left.x - right.x);
 
   const sameLineConcept = row.items
-    .filter((item) => !isDateToken(item.str) && !isAmountToken(item.str))
+    .filter((item) =>
+      !isMovementDateToken(item.str) && !isMovementAmountToken(item.str))
     .map((item) => item.str)
     .join(' ');
 
@@ -173,8 +138,8 @@ function parseValueRow(
 
   return toAccountMovementInput(
     concept,
-    parseAmountToken(amountText),
-    parseDateToken(operationDate),
+    parseMovementAmount(amountText),
+    parseMovementDate(operationDate),
   );
 }
 

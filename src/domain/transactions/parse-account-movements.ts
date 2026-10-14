@@ -1,7 +1,7 @@
 import type { TransactionFormInput } from './transaction-form';
+import { parseMovementAmount } from '@/utils/movement-amount';
+import { parseMovementDate } from '@/utils/movement-date';
 import { normalizeWhitespace } from '@/utils/normalize-whitespace';
-import { parseSpanishAmount } from '@/utils/parse-spanish-amount';
-import { parseSpanishDateToIso } from '@/utils/parse-spanish-date';
 import { toAccountMovementInput } from './to-account-movement-input';
 
 const HEADER_FECHA_OPERACION = 'fecha operacion';
@@ -48,8 +48,8 @@ function parseMovementRow(
 
   return toAccountMovementInput(
     concept,
-    parseSpanishAmount(amountText),
-    parseSpanishDateToIso(operationDate),
+    parseMovementAmount(amountText),
+    parseMovementDate(operationDate),
   );
 }
 
